@@ -5,118 +5,269 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sandeep & Suhasini's Wedding</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: transparent;
-      background-image: url('https://www.transparenttextures.com/patterns/paisley.png');
-      background-repeat: repeat;
+      background-color: white;
+      overflow-x: hidden;
     }
     .script-font {
       font-family: 'Great Vibes', cursive;
     }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .dancing-font {
+      font-family: 'Dancing Script', cursive;
     }
-    @keyframes pulseText {
-      0%, 100% { transform: scale(1); color: #9333ea; }
-      50% { transform: scale(1.1); color: #db2777; }
-    }
-    .animate-fadeInUp {
-      animation: fadeInUp 1s ease-out forwards;
-    }
-    .floral-border {
-      padding: 2rem;
-      border-radius: 2rem;
+    .magical-border {
       position: relative;
-      background-color: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-      border: 20px solid transparent;
-      border-image: url('https://www.transparenttextures.com/patterns/floral.png') 30 round;
-    }
-    .gold-frame {
-      border: 10px solid gold;
-      padding: 1rem;
+      padding: 3rem;
       border-radius: 2rem;
+      background: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      z-index: 1;
     }
-    .cross-clipart {
-      width: 60px;
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes pulseHeart {
+      0% { transform: scale(1); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.7; }
+    }
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    .pulse-heart {
+      animation: pulseHeart 2s ease infinite;
+      display: inline-block;
+    }
+    .photo-frame {
+      border: 12px solid white;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transform: perspective(1000px) rotateY(0deg);
+      transition: all 0.5s ease;
+      cursor: pointer;
+    }
+    .photo-frame:hover {
+      transform: perspective(1000px) rotateY(10deg);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    .countdown-box {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    .countdown-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .btn-magic {
+      background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .btn-magic:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(0,0,0,0.15);
+    }
+    .floral-divider {
+      position: relative;
+      height: 30px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0,5 Q25,10 50,5 T100,5" fill="none" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
+      background-repeat: repeat-x;
+      margin: 2rem 0;
+    }
+    .photo-container {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
       margin: 0 auto;
     }
-    .event-date {
-      font-size: 2rem;
-      font-weight: 700;
-      animation: pulseText 2s infinite;
+    .couple-image {
+      animation: fadeIn 1s ease-out;
     }
-    #audioControls {
-      display: none;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center py-10 px-4">
-  <div class="gold-frame w-full max-w-6xl">
-    <div class="floral-border shadow-2xl text-center space-y-6 animate-fadeInUp">
-      <img src="https://www.dropbox.com/scl/fi/e3pks83zxpx2yg5lrswk6/download.jpeg?rlkey=8zjgwq6qbe3sc6pto8ea9u45a&raw=1" alt="Jesus Cross" class="cross-clipart animate-fadeInUp" />
-      <img id="coupleImage" src="https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1" alt="Sandeep & Suhasini" class="rounded-xl w-full max-w-3xl mx-auto object-contain h-auto sm:h-96 shadow-md transition duration-500 hover:scale-105"/>
-      <h1 class="script-font text-4xl sm:text-6xl text-pink-600 animate-fadeInUp">💞 Sandeep & Suhasini 💞</h1>
-      <p class="text-base sm:text-lg text-gray-700 italic animate-fadeInUp">🙏 "Therefore what God has joined together, let no one separate."<br/><span class="font-semibold">— Mark 10:9</span></p>
-      <p class="text-base sm:text-lg text-gray-700 italic animate-fadeInUp">💖 With joy in our hearts and blessings from above, We, <span class="font-semibold">Sandeep & Suhasini</span>, invite you to celebrate our union of love.</p>
-      <p class="text-base sm:text-lg text-gray-700 italic animate-fadeInUp">🎉 Your presence will make our day truly special. Join us as we begin this beautiful journey together.</p>
-      <p class="event-date animate-fadeInUp">Friday, 27<sup>th</sup> June 2025 | 5:00 PM</p>
-      <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-base sm:text-xl font-bold animate-fadeInUp">
-        <div><span id="days" class="block text-4xl sm:text-5xl text-pink-600">0</span>Days</div>
-        <div><span id="hours" class="block text-4xl sm:text-5xl text-pink-600">0</span>Hours</div>
-        <div><span id="minutes" class="block text-4xl sm:text-5xl text-pink-600">0</span>Minutes</div>
-        <div><span id="seconds" class="block text-4xl sm:text-5xl text-pink-600">0</span>Seconds</div>
+  <!-- Main Content -->
+  <div class="w-full max-w-6xl mx-4">
+    <div class="magical-border text-center space-y-6">
+      <!-- Cross with Flowers -->
+      <div class="relative">
+        <img src="https://www.dropbox.com/scl/fi/e3pks83zxpx2yg5lrswk6/download.jpeg?rlkey=8zjgwq6qbe3sc6pto8ea9u45a&raw=1" alt="Jesus Cross" class="mx-auto h-20 animate__animated animate__fadeInDown" />
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl">🌸</div>
+        <div class="absolute top-0 right-1/4 transform translate-y-1/2 text-3xl">🌼</div>
+        <div class="absolute bottom-0 left-1/4 transform -translate-y-1/2 text-3xl">🌷</div>
       </div>
-      <div class="text-gray-800 mt-4 text-sm sm:text-lg animate-fadeInUp">📍 Venue: <a href="https://maps.app.goo.gl/sLoa7juqbBdN1ZFB7" class="text-blue-700 underline font-semibold" target="_blank">C.S.I All Saints' Church, Tirumalagiri</a></div>
-      <div class="flex justify-center animate-fadeInUp">
-        <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1" alt="Church Venue" class="rounded-xl h-32 sm:h-48 w-auto shadow-md" />
+      
+      <!-- Couple Photo -->
+      <div class="photo-container">
+        <img id="coupleImage" src="https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1" alt="Sandeep & Suhasini" class="photo-frame rounded-xl w-full mx-auto object-contain h-auto sm:h-96 floating couple-image"/>
+        <div class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-4xl pulse-heart">❤️</div>
       </div>
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="tel:+919542181245" class="inline-block bg-pink-600 text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-full hover:bg-pink-700 transition animate-fadeInUp">📞 Get RSVP Details</a>
-        <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T110000Z/20250627T130000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" class="inline-block bg-green-600 text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-full hover:bg-green-700 transition animate-fadeInUp">🗓️ Add to Calendar</button>
-        <a href="https://maps.app.goo.gl/NKV6TcAgJKDWrv8a6" target="_blank" class="inline-block bg-purple-600 text-white font-semibold px-6 py-3 sm:px-8 sm:py-4 rounded-full hover:bg-purple-700 transition animate-fadeInUp">📍 View Map</a>
+      
+      <!-- Wedding Title -->
+      <h1 class="script-font text-5xl sm:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 animate__animated animate__fadeIn">
+        Sandeep <span class="dancing-font text-3xl sm:text-5xl align-middle mx-2">&</span> Suhasini
+      </h1>
+      
+      <!-- Bible Verse -->
+      <div class="relative py-4">
+        <div class="floral-divider"></div>
+        <p class="text-lg sm:text-xl text-gray-700 italic px-4 sm:px-10 animate__animated animate__fadeIn">
+          <span class="text-2xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-2xl">"</span><br/>
+          <span class="font-semibold text-purple-700">— Mark 10:9</span>
+        </p>
+        <div class="floral-divider"></div>
       </div>
-      <footer class="text-xs sm:text-sm text-gray-500 mt-8 animate-fadeInUp">Made with ❤️ by Sandeep</footer>
+      
+      <!-- Invitation Text -->
+      <div class="space-y-4 text-gray-700 px-4 sm:px-10">
+        <p class="text-base sm:text-lg animate__animated animate__fadeIn animate__delay-1s">
+          <span class="text-xl mr-2">✨</span>With joy in our hearts and blessings from above,<br/>
+          We, <span class="font-semibold text-pink-600">Sandeep & Suhasini</span>, invite you to celebrate our union of love.
+        </p>
+        <p class="text-base sm:text-lg animate__animated animate__fadeIn animate__delay-1s">
+          <span class="text-xl mr-2">💫</span>Your presence will make our day truly special.<br/>
+          Join us as we begin this beautiful journey together.
+        </p>
+      </div>
+      
+      <!-- Wedding Date -->
+      <div class="py-4 animate__animated animate__pulse animate__infinite animate__slower">
+        <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-6 py-2">
+          <p class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
+            Friday, 27<sup>th</sup> June 2025 | 5:00 PM
+          </p>
+        </div>
+      </div>
+      
+      <!-- Countdown -->
+      <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-lg font-bold my-6">
+        <div class="countdown-box p-4">
+          <span id="days" class="block text-4xl sm:text-5xl text-pink-600">0</span>
+          <span class="text-sm text-gray-600">Days</span>
+        </div>
+        <div class="countdown-box p-4">
+          <span id="hours" class="block text-4xl sm:text-5xl text-pink-600">0</span>
+          <span class="text-sm text-gray-600">Hours</span>
+        </div>
+        <div class="countdown-box p-4">
+          <span id="minutes" class="block text-4xl sm:text-5xl text-pink-600">0</span>
+          <span class="text-sm text-gray-600">Minutes</span>
+        </div>
+        <div class="countdown-box p-4">
+          <span id="seconds" class="block text-4xl sm:text-5xl text-pink-600">0</span>
+          <span class="text-sm text-gray-600">Seconds</span>
+        </div>
+      </div>
+      
+      <!-- Venue Information -->
+      <div class="space-y-4">
+        <div class="text-gray-800 text-lg">
+          <span class="text-xl mr-2">🏰</span>Venue: 
+          <a href="https://maps.app.goo.gl/sLoa7juqbBdN1ZFB7" class="text-purple-700 underline font-semibold" target="_blank">
+            C.S.I All Saints' Church, Tirumalagiri
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1" alt="Church Venue" class="photo-frame rounded-xl h-32 sm:h-48 w-auto" />
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
+        <a href="tel:+919542181245" class="btn-magic text-white font-semibold px-6 py-3 rounded-full">
+          📞 Get RSVP Details
+        </a>
+        <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T110000Z/20250627T130000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" class="btn-magic text-white font-semibold px-6 py-3 rounded-full">
+          🗓️ Add to Calendar
+        </button>
+        <a href="https://maps.app.goo.gl/NKV6TcAgJKDWrv8a6" target="_blank" class="btn-magic text-white font-semibold px-6 py-3 rounded-full">
+          📍 View Map
+        </a>
+      </div>
+      
+      <!-- Footer -->
+      <footer class="text-sm text-gray-500 mt-8 relative">
+        <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xl pulse-heart">❤️</div>
+        Made with <span class="pulse-heart">❤️</span> by Sandeep
+      </footer>
     </div>
   </div>
+  
+  <!-- Audio Element -->
   <audio id="weddingAudio" loop autoplay>
     <source src="https://www.dropbox.com/scl/fi/zhci7mzlq51gk5hw7nfrd/Yahova-Na-Mora-Music-Video-The-Indian-Classical-Dance-version.mp3?rlkey=ioyta2m7cf44ut5vontv68hdh&raw=1" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+  
   <script>
+    // Countdown Timer
     const countdown = () => {
       const weddingDate = new Date("2025-06-27T17:00:00");
       const now = new Date();
       const diff = weddingDate - now;
+      
       if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = "The Big Day is Here!";
+        document.getElementById("countdown").innerHTML = `
+          <div class="col-span-4 py-6">
+            <div class="text-3xl sm:text-4xl font-bold text-pink-600 animate__animated animate__heartBeat animate__infinite">
+              The Big Day is Here! 🎉
+            </div>
+          </div>
+        `;
         return;
       }
+      
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
+      
       document.getElementById("days").textContent = days;
       document.getElementById("hours").textContent = hours;
       document.getElementById("minutes").textContent = minutes;
       document.getElementById("seconds").textContent = seconds;
     };
+    
     countdown();
     setInterval(countdown, 1000);
 
+    // Image Carousel
     const images = [
       "https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1",
       "https://www.dropbox.com/scl/fi/2y37embtw608fyoa9m17s/Engage.png?rlkey=s7luyzzldhy3q5bgjrbizsez7&raw=1"
     ];
     let current = 0;
-    setInterval(() => {
+    
+    const changeImage = () => {
       current = (current + 1) % images.length;
-      document.getElementById("coupleImage").src = images[current];
-    }, 2000);
+      const imgElement = document.getElementById("coupleImage");
+      imgElement.classList.remove("couple-image");
+      void imgElement.offsetWidth; // Trigger reflow
+      imgElement.src = images[current];
+      imgElement.classList.add("couple-image");
+    };
+    
+    // Auto-rotate every 5 seconds
+    let carouselInterval = setInterval(changeImage, 5000);
+    
+    // Change image on click
+    document.getElementById("coupleImage").addEventListener("click", () => {
+      // Reset the timer when manually changing image
+      clearInterval(carouselInterval);
+      changeImage();
+      carouselInterval = setInterval(changeImage, 5000);
+    });
   </script>
 </body>
 </html>
