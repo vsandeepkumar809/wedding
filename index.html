@@ -10,9 +10,96 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: white;
+      background-color: #fff9fb;
       overflow-x: hidden;
+      /* Floral background pattern */
+      background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T90,50" fill="none" stroke="%23ffcce6" stroke-width="0.5"/></svg>');
     }
+    
+    /* Wedding Border Styles */
+    .wedding-border {
+      position: relative;
+      padding: 2rem;
+      margin: 1rem;
+      background: white;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    }
+    
+    .wedding-border::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
+      background-repeat: repeat-x;
+    }
+    
+    .wedding-border::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
+      background-repeat: repeat-x;
+    }
+    
+    .left-border {
+      position: absolute;
+      left: 0;
+      top: 40px;
+      bottom: 40px;
+      width: 40px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 100"><path d="M10,0 Q0,25 10,50 T10,100" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
+      background-repeat: repeat-y;
+    }
+    
+    .right-border {
+      position: absolute;
+      right: 0;
+      top: 40px;
+      bottom: 40px;
+      width: 40px;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 100"><path d="M10,0 Q20,25 10,50 T10,100" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
+      background-repeat: repeat-y;
+    }
+    
+    /* Corner decorations */
+    .corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    
+    .top-left {
+      top: 0;
+      left: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,0 Q0,0 0,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="10" cy="10" r="3" fill="%23ff9a9e"/><circle cx="25" cy="5" r="2" fill="%23ff9a9e"/><circle cx="5" cy="25" r="2" fill="%23ff9a9e"/></svg>');
+    }
+    
+    .top-right {
+      top: 0;
+      right: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,0 Q50,0 50,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="40" cy="10" r="3" fill="%23ff9a9e"/><circle cx="25" cy="5" r="2" fill="%23ff9a9e"/><circle cx="45" cy="25" r="2" fill="%23ff9a9e"/></svg>');
+    }
+    
+    .bottom-left {
+      bottom: 0;
+      left: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,50 Q0,50 0,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="10" cy="40" r="3" fill="%23ff9a9e"/><circle cx="25" cy="45" r="2" fill="%23ff9a9e"/><circle cx="5" cy="25" r="2" fill="%23ff9a9e"/></svg>');
+    }
+    
+    .bottom-right {
+      bottom: 0;
+      right: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,50 Q50,50 50,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="40" cy="40" r="3" fill="%23ff9a9e"/><circle cx="25" cy="45" r="2" fill="%23ff9a9e"/><circle cx="45" cy="25" r="2" fill="%23ff9a9e"/></svg>');
+    }
+
     .script-font {
       font-family: 'Great Vibes', cursive;
     }
@@ -22,7 +109,7 @@
     .magical-border {
       position: relative;
       padding: 3rem;
-      border-radius: 2rem;
+      border-radius: 1rem;
       background: white;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       z-index: 1;
@@ -118,8 +205,19 @@
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center py-10 px-4">
-  <!-- Main Content -->
-  <div class="w-full max-w-6xl mx-4">
+  <!-- Wedding Border Container -->
+  <div class="wedding-border w-full max-w-6xl relative">
+    <!-- Corner decorations -->
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+    
+    <!-- Side borders -->
+    <div class="left-border"></div>
+    <div class="right-border"></div>
+    
+    <!-- Main Content -->
     <div class="magical-border text-center space-y-6">
       <!-- Cross with Flowers -->
       <div class="relative">
@@ -134,7 +232,7 @@
         <div class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-4xl pulse-heart">❤️</div>
       </div>
       
-      <!-- Wedding Title - Fixed to ensure full visibility -->
+      <!-- Wedding Title -->
       <div class="w-full overflow-x-visible">
         <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 animate__animated animate__fadeIn couple-name">
           Sandeep <span class="dancing-font align-middle mx-1">&</span> Suhasini
