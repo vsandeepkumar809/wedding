@@ -41,29 +41,6 @@
       overflow: hidden;
       position: relative;
     }
-    .photo-frame {
-      border: 10px solid white;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      width: 100%;
-      height: auto;
-      max-height: 60vh;
-      object-fit: contain;
-    }
-    .audio-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: white;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      cursor: pointer;
-      z-index: 100;
-    }
     .couple-name {
       font-size: clamp(2rem, 8vw, 3.5rem);
       line-height: 1.2;
@@ -85,22 +62,6 @@
     }
     .animate-fade {
       animation: fadeIn 0.8s ease-out forwards;
-    }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    .floating {
-      animation: float 6s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-    .pulse {
-      animation: pulse 2s infinite;
     }
     .invitation-text {
       background: linear-gradient(135deg, #fff0f5 0%, #f8f0ff 100%);
@@ -136,6 +97,56 @@
       background: rgba(255, 255, 255, 0.3);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+    .mini-player {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 25px;
+      padding: 8px 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: opacity 0.3s ease;
+      z-index: 100;
+    }
+    .mini-player.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .mini-player-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .play-pause-mini {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: linear-gradient(to right, #ec4899, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    .progress-mini {
+      flex-grow: 1;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      margin: 0 10px;
+      overflow: hidden;
+    }
+    .progress-bar-mini {
+      height: 100%;
+      background: linear-gradient(to right, #ec4899, #8b5cf6);
+      width: 0%;
     }
   </style>
 </head>
@@ -232,13 +243,18 @@
     </div>
   </div>
   
-  <!-- Audio Control Button -->
-  <div class="audio-control" id="audioControl">
-    <span id="audioIcon">🔊</span>
+  <!-- Mini Audio Player -->
+  <div class="mini-player hidden" id="miniPlayer">
+    <div class="mini-player-controls">
+      <button class="play-pause-mini" id="miniPlayPause">▶</button>
+      <div class="progress-mini">
+        <div class="progress-bar-mini" id="miniProgressBar"></div>
+      </div>
+    </div>
   </div>
   
   <!-- Audio Element -->
-  <audio id="weddingAudio" loop autoplay>
+  <audio id="weddingAudio" loop>
     <source src="https://www.dropbox.com/scl/fi/zhci7mzlq51gk5hw7nfrd/Yahova-Na-Mora-Music-Video-The-Indian-Classical-Dance-version.mp3?rlkey=ioyta2m7cf44ut5vontv68hdh&raw=1" type="audio/mpeg">
   </audio>
 
@@ -246,78 +262,90 @@
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
-    // Audio Handling
+    // Audio Elements
     const audio = document.getElementById('weddingAudio');
-    const audioControl = document.getElementById('audioControl');
-    const audioIcon = document.getElementById('audioIcon');
+    const miniPlayer = document.getElementById('miniPlayer');
+    const miniPlayPause = document.getElementById('miniPlayPause');
+    const miniProgressBar = document.getElementById('miniProgressBar');
     let isPlaying = false;
+    let hideTimeout;
     
-    // Function to handle audio play
-    const handleAudio = () => {
-      // Set volume to 50% to avoid being too loud
-      audio.volume = 0.5;
-      
-      // Try to play immediately (works on desktop)
-      const playPromise = audio.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            isPlaying = true;
-            audioIcon.textContent = '🔊';
-          })
-          .catch(error => {
-            // Autoplay was prevented - show muted icon
-            audioIcon.textContent = '🔇';
-            
-            // On mobile, wait for user interaction
-            if (isMobile) {
-              const enableAudio = () => {
-                audio.play()
-                  .then(() => {
-                    isPlaying = true;
-                    audioIcon.textContent = '🔊';
-                  })
-                  .catch(e => console.log("Audio play failed:", e));
-                
-                // Remove listeners after first interaction
-                document.removeEventListener('click', enableAudio);
-                document.removeEventListener('touchstart', enableAudio);
-              };
-              
-              document.addEventListener('click', enableAudio, { once: true });
-              document.addEventListener('touchstart', enableAudio, { once: true });
-            }
-          });
-      }
-    };
-    
-    // Initialize audio
-    handleAudio();
-    
-    // Toggle play/pause
-    audioControl.addEventListener('click', (e) => {
-      e.stopPropagation();
+    // Function to toggle play/pause
+    function togglePlayPause() {
       if (isPlaying) {
         audio.pause();
-        audioIcon.textContent = '🔇';
+        miniPlayPause.textContent = '▶';
       } else {
-        audio.play()
-          .then(() => {
-            audioIcon.textContent = '🔊';
-          });
+        audio.play();
+        miniPlayPause.textContent = '❚❚';
       }
       isPlaying = !isPlaying;
-    });
+      showMiniPlayer();
+    }
     
-    // Handle visibility changes
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && isPlaying) {
-        audio.pause();
-      } else if (!document.hidden && isPlaying) {
-        audio.play().catch(e => {});
+    // Update progress bar
+    function updateProgress() {
+      const progressPercent = (audio.currentTime / audio.duration) * 100;
+      miniProgressBar.style.width = `${progressPercent}%`;
+    }
+    
+    // Show mini player
+    function showMiniPlayer() {
+      miniPlayer.classList.remove('hidden');
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        if (isPlaying) {
+          miniPlayer.classList.add('hidden');
+        }
+      }, 2000);
+    }
+    
+    // Set progress when clicked on progress bar
+    function setProgress(e) {
+      const progressContainer = e.currentTarget;
+      const clickPosition = e.clientX - progressContainer.getBoundingClientRect().left;
+      const progressWidth = progressContainer.clientWidth;
+      const percentageClicked = (clickPosition / progressWidth);
+      audio.currentTime = percentageClicked * audio.duration;
+    }
+    
+    // Event Listeners
+    miniPlayPause.addEventListener('click', togglePlayPause);
+    document.addEventListener('click', function(e) {
+      // Show player when clicking anywhere if it's hidden
+      if (miniPlayer.classList.contains('hidden') && e.target !== miniPlayer) {
+        showMiniPlayer();
       }
     });
+    miniPlayer.addEventListener('click', function(e) {
+      e.stopPropagation();
+      showMiniPlayer();
+    });
+    document.querySelector('.progress-mini').addEventListener('click', setProgress);
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('ended', () => {
+      miniPlayPause.textContent = '▶';
+      isPlaying = false;
+    });
+    
+    // Initialize audio
+    audio.volume = 0.5;
+    
+    // Try to autoplay (will work on desktop)
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          isPlaying = true;
+          miniPlayPause.textContent = '❚❚';
+          showMiniPlayer();
+        })
+        .catch(error => {
+          // Autoplay was prevented
+          isPlaying = false;
+          miniPlayPause.textContent = '▶';
+        });
+    }
     
     // Countdown Timer
     const countdown = () => {
