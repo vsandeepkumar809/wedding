@@ -3,105 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sandeep & Suhasini's Wedding</title>
+  <title>Sandeep & Suhasini's Fairytale Wedding</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #fff9fb;
+      background-color: transparent;
       overflow-x: hidden;
-      /* Floral background pattern */
-      background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T90,50" fill="none" stroke="%23ffcce6" stroke-width="0.5"/></svg>');
     }
-    
-    /* Wedding Border Styles */
-    .wedding-border {
-      position: relative;
-      padding: 2rem;
-      margin: 1rem;
-      background: white;
-      box-shadow: 0 0 30px rgba(0,0,0,0.1);
-    }
-    
-    .wedding-border::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,0 50,10 T100,10" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
-      background-repeat: repeat-x;
-    }
-    
-    .wedding-border::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 40px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
-      background-repeat: repeat-x;
-    }
-    
-    .left-border {
-      position: absolute;
-      left: 0;
-      top: 40px;
-      bottom: 40px;
-      width: 40px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 100"><path d="M10,0 Q0,25 10,50 T10,100" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
-      background-repeat: repeat-y;
-    }
-    
-    .right-border {
-      position: absolute;
-      right: 0;
-      top: 40px;
-      bottom: 40px;
-      width: 40px;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 100"><path d="M10,0 Q20,25 10,50 T10,100" fill="%23fff9fb" stroke="%23ff9a9e" stroke-width="0.5"/></svg>');
-      background-repeat: repeat-y;
-    }
-    
-    /* Corner decorations */
-    .corner {
-      position: absolute;
-      width: 40px;
-      height: 40px;
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
-    
-    .top-left {
-      top: 0;
-      left: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,0 Q0,0 0,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="10" cy="10" r="3" fill="%23ff9a9e"/><circle cx="25" cy="5" r="2" fill="%23ff9a9e"/><circle cx="5" cy="25" r="2" fill="%23ff9a9e"/></svg>');
-    }
-    
-    .top-right {
-      top: 0;
-      right: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,0 Q50,0 50,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="40" cy="10" r="3" fill="%23ff9a9e"/><circle cx="25" cy="5" r="2" fill="%23ff9a9e"/><circle cx="45" cy="25" r="2" fill="%23ff9a9e"/></svg>');
-    }
-    
-    .bottom-left {
-      bottom: 0;
-      left: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,50 Q0,50 0,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="10" cy="40" r="3" fill="%23ff9a9e"/><circle cx="25" cy="45" r="2" fill="%23ff9a9e"/><circle cx="5" cy="25" r="2" fill="%23ff9a9e"/></svg>');
-    }
-    
-    .bottom-right {
-      bottom: 0;
-      right: 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M25,50 Q50,50 50,25" fill="none" stroke="%23ff9a9e" stroke-width="1"/><circle cx="40" cy="40" r="3" fill="%23ff9a9e"/><circle cx="25" cy="45" r="2" fill="%23ff9a9e"/><circle cx="45" cy="25" r="2" fill="%23ff9a9e"/></svg>');
-    }
-
     .script-font {
       font-family: 'Great Vibes', cursive;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     .dancing-font {
       font-family: 'Dancing Script', cursive;
@@ -109,10 +23,28 @@
     .magical-border {
       position: relative;
       padding: 3rem;
-      border-radius: 1rem;
-      background: white;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 2rem;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+      border: 2px solid transparent;
+      background-clip: padding-box;
       z-index: 1;
+    }
+    .magical-border::before {
+      content: "";
+      position: absolute;
+      top: -5px; left: -5px;
+      right: -5px; bottom: -5px;
+      background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+      border-radius: 2.5rem;
+      z-index: -1;
+      animation: rainbowBorder 8s linear infinite;
+      background-size: 400% 400%;
+    }
+    @keyframes rainbowBorder {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     @keyframes float {
       0% { transform: translateY(0px); }
@@ -124,6 +56,15 @@
       50% { transform: scale(1.3); opacity: 1; }
       100% { transform: scale(1); opacity: 0.7; }
     }
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; }
+      100% { opacity: 0; transform: scale(1.5) rotate(360deg); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
     .floating {
       animation: float 6s ease-in-out infinite;
     }
@@ -131,35 +72,59 @@
       animation: pulseHeart 2s ease infinite;
       display: inline-block;
     }
+    .sparkle {
+      position: absolute;
+      background: radial-gradient(circle, #fff 10%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10;
+      animation: sparkle 1s ease-out forwards;
+    }
     .photo-frame {
       border: 12px solid white;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 30px rgba(0,0,0,0.2);
       transform: perspective(1000px) rotateY(0deg);
       transition: all 0.5s ease;
       cursor: pointer;
     }
     .photo-frame:hover {
       transform: perspective(1000px) rotateY(10deg);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
     }
     .countdown-box {
-      background: white;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,240,245,0.9) 100%);
       border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
     }
     .countdown-box:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
     .btn-magic {
       background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+      background-size: 200% 200%;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     .btn-magic:hover {
       transform: translateY(-3px);
       box-shadow: 0 7px 20px rgba(0,0,0,0.15);
+      background-position: 100% 50%;
+    }
+    .hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
     }
     .floral-divider {
       position: relative;
@@ -177,69 +142,35 @@
     .couple-image {
       animation: fadeIn 1s ease-out;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    .audio-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: white;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      cursor: pointer;
-      z-index: 100;
-    }
-    .couple-name {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      white-space: nowrap;
-      overflow: visible;
-      padding: 0 10px;
-    }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center py-10 px-4">
-  <!-- Wedding Border Container -->
-  <div class="wedding-border w-full max-w-6xl relative">
-    <!-- Corner decorations -->
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-    
-    <!-- Side borders -->
-    <div class="left-border"></div>
-    <div class="right-border"></div>
-    
-    <!-- Main Content -->
-    <div class="magical-border text-center space-y-6">
-      <!-- Cross with Flowers -->
+<body class="min-h-screen flex items-center justify-center py-10 px-4 relative">
+  <!-- Floating Hearts Background -->
+  <div class="hearts-container" id="heartsContainer"></div>
+  
+  <!-- Main Content -->
+  <div class="w-full max-w-6xl mx-4">
+    <div class="magical-border shadow-2xl text-center space-y-6">
+      <!-- Animated Cross with Flowers -->
       <div class="relative">
         <img src="https://www.dropbox.com/scl/fi/e3pks83zxpx2yg5lrswk6/download.jpeg?rlkey=8zjgwq6qbe3sc6pto8ea9u45a&raw=1" alt="Jesus Cross" class="mx-auto h-20 animate__animated animate__fadeInDown" />
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl">🌸</div>
         <div class="absolute top-0 right-1/4 transform translate-y-1/2 text-3xl">🌼</div>
         <div class="absolute bottom-0 left-1/4 transform -translate-y-1/2 text-3xl">🌷</div>
       </div>
       
-      <!-- Couple Photo -->
+      <!-- Couple Photo with Floating Effect -->
       <div class="photo-container">
         <img id="coupleImage" src="https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1" alt="Sandeep & Suhasini" class="photo-frame rounded-xl w-full mx-auto object-contain h-auto sm:h-96 floating couple-image"/>
         <div class="absolute -bottom-5 left-1/2 transform -translate-x-1/2 text-4xl pulse-heart">❤️</div>
       </div>
       
-      <!-- Wedding Title -->
-      <div class="w-full overflow-x-visible">
-        <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 animate__animated animate__fadeIn couple-name">
-          Sandeep <span class="dancing-font align-middle mx-1">&</span> Suhasini
-        </h1>
-      </div>
+      <!-- Wedding Title with Animation -->
+      <h1 class="script-font text-5xl sm:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 animate__animated animate__fadeIn">
+        Sandeep <span class="dancing-font text-3xl sm:text-5xl align-middle mx-2">&</span> Suhasini
+      </h1>
       
-      <!-- Bible Verse -->
+      <!-- Bible Verse with Decoration -->
       <div class="relative py-4">
         <div class="floral-divider"></div>
         <p class="text-lg sm:text-xl text-gray-700 italic px-4 sm:px-10 animate__animated animate__fadeIn">
@@ -249,19 +180,19 @@
         <div class="floral-divider"></div>
       </div>
       
-      <!-- Invitation Text -->
+      <!-- Invitation Text with Floating Elements -->
       <div class="space-y-4 text-gray-700 px-4 sm:px-10">
         <p class="text-base sm:text-lg animate__animated animate__fadeIn animate__delay-1s">
           <span class="text-xl mr-2">✨</span>With joy in our hearts and blessings from above,<br/>
           We, <span class="font-semibold text-pink-600">Sandeep & Suhasini</span>, invite you to celebrate our union of love.
         </p>
         <p class="text-base sm:text-lg animate__animated animate__fadeIn animate__delay-1s">
-          <span class="text-xl mr-2">💫</span>Your presence will make our day truly special.<br/>
+          <span class="text-xl mr-2">💫</span>Your presence will make our day truly magical.<br/>
           Join us as we begin this beautiful journey together.
         </p>
       </div>
       
-      <!-- Wedding Date -->
+      <!-- Wedding Date with Special Styling -->
       <div class="py-4 animate__animated animate__pulse animate__infinite animate__slower">
         <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-6 py-2">
           <p class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
@@ -270,7 +201,7 @@
         </div>
       </div>
       
-      <!-- Countdown -->
+      <!-- Countdown with Animated Boxes -->
       <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-lg font-bold my-6">
         <div class="countdown-box p-4">
           <span id="days" class="block text-4xl sm:text-5xl text-pink-600">0</span>
@@ -290,7 +221,7 @@
         </div>
       </div>
       
-      <!-- Venue Information -->
+      <!-- Venue Information with Church Image -->
       <div class="space-y-4">
         <div class="text-gray-800 text-lg">
           <span class="text-xl mr-2">🏰</span>Venue: 
@@ -303,7 +234,7 @@
         </div>
       </div>
       
-      <!-- Action Buttons -->
+      <!-- Action Buttons with Magic Effect -->
       <div class="flex flex-col sm:flex-row justify-center gap-4 pt-6">
         <a href="tel:+919542181245" class="btn-magic text-white font-semibold px-6 py-3 rounded-full">
           📞 Get RSVP Details
@@ -316,7 +247,7 @@
         </a>
       </div>
       
-      <!-- Footer -->
+      <!-- Footer with Floating Hearts -->
       <footer class="text-sm text-gray-500 mt-8 relative">
         <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 text-xl pulse-heart">❤️</div>
         Made with <span class="pulse-heart">❤️</span> by Sandeep
@@ -324,16 +255,14 @@
     </div>
   </div>
   
-  <!-- Audio Control Button -->
-  <div class="audio-control" id="audioControl">
-    <span id="audioIcon">🔊</span>
-  </div>
-  
   <!-- Audio Element -->
-  <audio id="weddingAudio" loop>
+  <audio id="weddingAudio" loop autoplay>
     <source src="https://www.dropbox.com/scl/fi/zhci7mzlq51gk5hw7nfrd/Yahova-Na-Mora-Music-Video-The-Indian-Classical-Dance-version.mp3?rlkey=ioyta2m7cf44ut5vontv68hdh&raw=1" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+  
+  <!-- Confetti Button (hidden) -->
+  <button id="confettiBtn" class="hidden"></button>
   
   <script>
     // Countdown Timer
@@ -393,77 +322,75 @@
       changeImage();
       carouselInterval = setInterval(changeImage, 5000);
     });
-
-    // Audio Control
-    const audio = document.getElementById('weddingAudio');
-    const audioControl = document.getElementById('audioControl');
-    const audioIcon = document.getElementById('audioIcon');
-    let isPlaying = false;
-
-    // Try to autoplay (may be blocked by browser)
-    const playAudio = () => {
-      audio.play()
-        .then(() => {
-          isPlaying = true;
-          audioIcon.textContent = '🔊';
-        })
-        .catch(error => {
-          console.log('Audio autoplay was prevented:', error);
-          isPlaying = false;
-          audioIcon.textContent = '🔇';
-        });
+    
+    // Create Floating Hearts
+    const createHearts = () => {
+      const container = document.getElementById('heartsContainer');
+      const heartEmojis = ['❤️', '💖', '💗', '💓', '💞', '💕', '💘'];
+      
+      for (let i = 0; i < 15; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = `${Math.random() * 100}vh`;
+        heart.style.fontSize = `${Math.random() * 20 + 10}px`;
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(heart);
+        
+        animateHeart(heart);
+      }
     };
-
-    // Initial attempt to play
-    playAudio();
-
-    // Toggle play/pause when clicking control
-    audioControl.addEventListener('click', () => {
-      if (isPlaying) {
-        audio.pause();
-        audioIcon.textContent = '🔇';
-      } else {
-        audio.play()
-          .then(() => {
-            audioIcon.textContent = '🔊';
-          })
-          .catch(error => {
-            console.log('Audio play failed:', error);
-          });
-      }
-      isPlaying = !isPlaying;
+    
+    const animateHeart = (heart) => {
+      const duration = Math.random() * 15 + 10;
+      const delay = Math.random() * 5;
+      
+      heart.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+      heart.style.opacity = '0';
+      
+      setTimeout(() => {
+        heart.style.opacity = '1';
+      }, delay * 1000);
+    };
+    
+    // Create Sparkle Effect on Click
+    document.addEventListener('click', (e) => {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = `${e.clientX - 15}px`;
+      sparkle.style.top = `${e.clientY - 15}px`;
+      sparkle.style.width = '30px';
+      sparkle.style.height = '30px';
+      document.body.appendChild(sparkle);
+      
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1000);
     });
-
-    // Pause when page loses focus
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        // Page is hidden, pause audio
-        audio.pause();
-      } else if (isPlaying) {
-        // Page is visible and we should be playing, resume
-        audio.play().catch(error => {
-          console.log('Audio resume failed:', error);
-        });
-      }
-    });
-
-    // Pause when navigating away
-    window.addEventListener('blur', () => {
-      audio.pause();
-    });
-
-    // Resume when returning (if was playing)
-    window.addEventListener('focus', () => {
-      if (isPlaying) {
-        audio.play().catch(error => {
-          console.log('Audio resume failed:', error);
-        });
-      }
-    });
-
-    // Handle page unload
-    window.addEventListener('beforeunload', () => {
-      audio.pause();
+    
+    // Initialize Effects
+    window.onload = () => {
+      createHearts();
+      
+      // Trigger confetti occasionally
+      setInterval(() => {
+        document.getElementById('confettiBtn').click();
+      }, 10000);
+    };
+  </script>
+  
+  <!-- Confetti JS -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const confettiBtn = document.getElementById('confettiBtn');
+    confettiBtn.addEventListener('click', () => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ff9a9e', '#fad0c4', '#a18cd1', '#fbc2eb']
+      });
     });
   </script>
 </body>
