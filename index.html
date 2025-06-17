@@ -2,24 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sandeep & Suhasini's Wedding</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: white;
-      width: 100vw;
-      min-height: 100vh;
-      overflow-x: hidden;
-      padding: 0;
+      background-color: #fff9fb;
+      background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T90,50" fill="none" stroke="%23ffcce6" stroke-width="0.5"/></svg>');
     }
     .script-font {
       font-family: 'Great Vibes', cursive;
@@ -27,211 +18,77 @@
     .dancing-font {
       font-family: 'Dancing Script', cursive;
     }
-    .magical-border {
-      position: relative;
-      padding: 1.5rem;
-      border-radius: 1rem;
-      background: white;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-      width: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-    @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
-    }
-    @keyframes pulseHeart {
-      0% { transform: scale(1); opacity: 0.7; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.7; }
-    }
-    .floating {
-      animation: float 6s ease-in-out infinite;
-    }
-    .pulse-heart {
-      animation: pulseHeart 2s ease infinite;
-      display: inline-block;
-    }
     .photo-frame {
-      border: 8px solid white;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      transform: perspective(1000px) rotateY(0deg);
-      transition: all 0.3s ease;
+      border: 12px solid white;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       cursor: pointer;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
     }
-    .photo-frame:hover {
-      transform: perspective(1000px) rotateY(5deg);
-    }
-    .countdown-box {
+    .audio-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-      transition: all 0.2s ease;
-      padding: 0.75rem;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      z-index: 100;
     }
-    .btn-magic {
-      background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%);
-      transition: all 0.2s ease;
-      padding: 0.75rem 1.5rem;
-      font-size: 0.9rem;
-    }
-    .floral-divider {
-      height: 20px;
-      margin: 1rem 0;
-    }
-    .photo-container {
-      position: relative;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 5px;
-    }
-    .couple-image {
-      animation: fadeIn 0.5s ease-out;
+    .couple-name {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      white-space: nowrap;
+      overflow: visible;
     }
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    .audio-control {
-      position: fixed;
-      bottom: 15px;
-      right: 15px;
-      width: 40px;
-      height: 40px;
-      font-size: 1rem;
-    }
-    .couple-name {
-      font-size: clamp(1.8rem, 6vw, 3rem);
-      line-height: 1.2;
-      padding: 0 5px;
-      word-break: keep-all;
-    }
-    .main-container {
-      width: 100%;
-      padding: 0.5rem;
-    }
-    @media (min-width: 640px) {
-      .magical-border {
-        padding: 2rem;
-      }
-      .photo-frame {
-        border-width: 12px;
-      }
-      .btn-magic {
-        padding: 1rem 2rem;
-        font-size: 1rem;
-      }
+    .fade-in {
+      animation: fadeIn 1s ease-out;
     }
   </style>
 </head>
-<body class="flex items-center justify-center p-0 m-0">
-  <!-- Main Container -->
-  <div class="main-container">
-    <div class="magical-border text-center space-y-4">
-      <!-- Cross with Flowers -->
-      <div class="relative mb-4">
-        <img src="https://www.dropbox.com/scl/fi/e3pks83zxpx2yg5lrswk6/download.jpeg?rlkey=8zjgwq6qbe3sc6pto8ea9u45a&raw=1" alt="Jesus Cross" class="mx-auto h-16" />
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-6 fade-in">
+    <div class="text-center space-y-6">
+      <!-- Jesus Cross -->
+      <div class="flex justify-center">
+        <img src="https://www.dropbox.com/scl/fi/e3pks83zxpx2yg5lrswk6/download.jpeg?rlkey=8zjgwq6qbe3sc6pto8ea9u45a&raw=1" 
+             alt="Jesus Cross" class="h-20"/>
       </div>
       
       <!-- Couple Photo -->
-      <div class="photo-container mb-4">
-        <img id="coupleImage" src="https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1" alt="Sandeep & Suhasini" class="photo-frame rounded-lg floating couple-image"/>
-        <div class="absolute -bottom-3 left-1/2 transform -translate-x-1/2 text-3xl pulse-heart">❤️</div>
+      <div class="photo-container">
+        <img id="coupleImage" src="https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1" 
+             alt="Sandeep & Suhasini" class="photo-frame rounded-xl w-full mx-auto"/>
       </div>
       
       <!-- Wedding Title -->
-      <div class="mb-4 w-full overflow-x-auto">
-        <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 couple-name">
-          Sandeep <span class="dancing-font">&</span> Suhasini
-        </h1>
-      </div>
+      <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 couple-name">
+        Sandeep <span class="dancing-font">&</span> Suhasini
+      </h1>
       
       <!-- Bible Verse -->
-      <div class="relative my-4">
-        <div class="floral-divider"></div>
-        <p class="text-sm sm:text-base text-gray-700 italic px-2">
-          <span class="text-xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-xl">"</span><br/>
-          <span class="font-semibold text-purple-700">— Mark 10:9</span>
-        </p>
-        <div class="floral-divider"></div>
-      </div>
-      
-      <!-- Invitation Text -->
-      <div class="space-y-3 text-gray-700 px-2 mb-4">
-        <p class="text-sm sm:text-base">
-          <span class="text-lg mr-1">✨</span>With joy in our hearts and blessings from above,<br/>
-          We, <span class="font-semibold text-pink-600">Sandeep & Suhasini</span>, invite you to celebrate our union of love.
-        </p>
-        <p class="text-sm sm:text-base">
-          <span class="text-lg mr-1">💫</span>Your presence will make our day truly special.<br/>
-          Join us as we begin this beautiful journey together.
-        </p>
-      </div>
+      <p class="text-gray-700 italic">
+        <span class="text-2xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-2xl">"</span><br/>
+        <span class="font-semibold text-purple-700">— Mark 10:9</span>
+      </p>
       
       <!-- Wedding Date -->
-      <div class="my-4">
-        <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-4 py-1">
-          <p class="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-            Friday, 27<sup>th</sup> June 2025 | 5:00 PM
-          </p>
-        </div>
+      <div class="py-4">
+        <p class="text-xl font-bold text-pink-600">
+          Friday, 27<sup>th</sup> June 2025 | 5:00 PM
+        </p>
       </div>
       
-      <!-- Countdown -->
-      <div id="countdown" class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center text-sm font-bold my-4">
-        <div class="countdown-box">
-          <span id="days" class="block text-2xl sm:text-3xl text-pink-600">0</span>
-          <span class="text-xs text-gray-600">Days</span>
-        </div>
-        <div class="countdown-box">
-          <span id="hours" class="block text-2xl sm:text-3xl text-pink-600">0</span>
-          <span class="text-xs text-gray-600">Hours</span>
-        </div>
-        <div class="countdown-box">
-          <span id="minutes" class="block text-2xl sm:text-3xl text-pink-600">0</span>
-          <span class="text-xs text-gray-600">Minutes</span>
-        </div>
-        <div class="countdown-box">
-          <span id="seconds" class="block text-2xl sm:text-3xl text-pink-600">0</span>
-          <span class="text-xs text-gray-600">Seconds</span>
-        </div>
+      <!-- Venue -->
+      <div class="text-gray-800">
+        <p class="font-semibold">C.S.I All Saints' Church, Tirumalagiri</p>
       </div>
-      
-      <!-- Venue Information -->
-      <div class="space-y-3 mt-4">
-        <div class="text-gray-800 text-sm sm:text-base">
-          <span class="text-lg mr-1">🏰</span>Venue: 
-          <a href="https://maps.app.goo.gl/sLoa7juqbBdN1ZFB7" class="text-purple-700 underline font-semibold" target="_blank">
-            C.S.I All Saints' Church, Tirumalagiri
-          </a>
-        </div>
-        <div class="flex justify-center">
-          <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1" alt="Church Venue" class="photo-frame rounded-lg h-24 sm:h-32 w-auto" />
-        </div>
-      </div>
-      
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row justify-center gap-3 pt-4">
-        <a href="tel:+919542181245" class="btn-magic text-white font-semibold rounded-full text-center">
-          📞 RSVP
-        </a>
-        <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T110000Z/20250627T130000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" class="btn-magic text-white font-semibold rounded-full text-center">
-          🗓️ Calendar
-        </button>
-        <a href="https://maps.app.goo.gl/NKV6TcAgJKDWrv8a6" target="_blank" class="btn-magic text-white font-semibold rounded-full text-center">
-          📍 Map
-        </a>
-      </div>
-      
-      <!-- Footer -->
-      <footer class="text-xs text-gray-500 mt-6 relative">
-        Made with <span class="pulse-heart">❤️</span> by Sandeep
-      </footer>
     </div>
   </div>
   
@@ -241,88 +98,43 @@
   </div>
   
   <!-- Audio Element -->
-  <audio id="weddingAudio" loop>
+  <audio id="weddingAudio" loop autoplay>
     <source src="https://www.dropbox.com/scl/fi/zhci7mzlq51gk5hw7nfrd/Yahova-Na-Mora-Music-Video-The-Indian-Classical-Dance-version.mp3?rlkey=ioyta2m7cf44ut5vontv68hdh&raw=1" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
-  
+
   <script>
-    // Countdown Timer
-    const countdown = () => {
-      const weddingDate = new Date("2025-06-27T17:00:00");
-      const now = new Date();
-      const diff = weddingDate - now;
-      
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = `
-          <div class="col-span-4 py-3">
-            <div class="text-xl sm:text-2xl font-bold text-pink-600">
-              The Big Day is Here! 🎉
-            </div>
-          </div>
-        `;
-        return;
-      }
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
-    };
-    
-    countdown();
-    setInterval(countdown, 1000);
-
-    // Image Carousel
-    const images = [
-      "https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1",
-      "https://www.dropbox.com/scl/fi/2y37embtw608fyoa9m17s/Engage.png?rlkey=s7luyzzldhy3q5bgjrbizsez7&raw=1"
-    ];
-    let current = 0;
-    
-    const changeImage = () => {
-      current = (current + 1) % images.length;
-      const imgElement = document.getElementById("coupleImage");
-      imgElement.classList.remove("couple-image");
-      void imgElement.offsetWidth;
-      imgElement.src = images[current];
-      imgElement.classList.add("couple-image");
-    };
-    
-    let carouselInterval = setInterval(changeImage, 5000);
-    
-    document.getElementById("coupleImage").addEventListener("click", () => {
-      clearInterval(carouselInterval);
-      changeImage();
-      carouselInterval = setInterval(changeImage, 5000);
-    });
-
-    // Audio Control
+    // Audio Handling
     const audio = document.getElementById('weddingAudio');
     const audioControl = document.getElementById('audioControl');
     const audioIcon = document.getElementById('audioIcon');
     let isPlaying = false;
 
-    const playAudio = () => {
+    // Function to handle audio play with user interaction
+    const handleAudioPlay = () => {
+      // Try to play immediately (works on desktop)
       audio.play()
         .then(() => {
           isPlaying = true;
           audioIcon.textContent = '🔊';
         })
         .catch(error => {
-          isPlaying = false;
-          audioIcon.textContent = '🔇';
+          // If autoplay fails, set up interaction-based play
+          document.body.addEventListener('click', () => {
+            audio.play()
+              .then(() => {
+                isPlaying = true;
+                audioIcon.textContent = '🔊';
+              });
+          }, { once: true });
         });
     };
 
-    playAudio();
+    // Initialize audio
+    handleAudioPlay();
 
-    audioControl.addEventListener('click', () => {
+    // Toggle play/pause
+    audioControl.addEventListener('click', (e) => {
+      e.stopPropagation();
       if (isPlaying) {
         audio.pause();
         audioIcon.textContent = '🔇';
@@ -335,26 +147,25 @@
       isPlaying = !isPlaying;
     });
 
+    // Handle visibility changes
     document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
+      if (document.hidden && isPlaying) {
         audio.pause();
-      } else if (isPlaying) {
-        audio.play().catch(error => {});
+      } else if (!document.hidden && isPlaying) {
+        audio.play().catch(e => {});
       }
     });
 
-    window.addEventListener('blur', () => {
-      audio.pause();
-    });
-
-    window.addEventListener('focus', () => {
-      if (isPlaying) {
-        audio.play().catch(error => {});
-      }
-    });
-
-    window.addEventListener('beforeunload', () => {
-      audio.pause();
+    // Image Carousel
+    const images = [
+      "https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1",
+      "https://www.dropbox.com/scl/fi/2y37embtw608fyoa9m17s/Engage.png?rlkey=s7luyzzldhy3q5bgjrbizsez7&raw=1"
+    ];
+    let current = 0;
+    
+    document.getElementById("coupleImage").addEventListener("click", () => {
+      current = (current + 1) % images.length;
+      document.getElementById("coupleImage").src = images[current];
     });
   </script>
 </body>
