@@ -194,9 +194,9 @@
       <div class="py-3">
         <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-4 py-1">
           <p class="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-  Friday, 27<sup class="text-xs align-super">th</sup> June 2025 | 5:00 PM
-</p>
-      </div>
+            Friday, 27<sup>th</sup> June 2025 | 5:00 PM
+          </p>
+        </div>
       </div>
       
       <!-- Countdown -->
@@ -351,24 +351,54 @@
       }
     });
     
-    // Try to autoplay (will work on desktop)
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          isPlaying = true;
-          miniPlayPause.textContent = '❚❚';
-          // Hide player after 5 seconds
-          hidePlayerTimeout = setTimeout(() => {
-            miniPlayer.classList.add('hidden');
-          }, 5000);
-        })
-        .catch(error => {
-          // Autoplay was prevented
-          isPlaying = false;
-          miniPlayPause.textContent = '▶';
-        });
+    // Function to handle audio autoplay with user interaction
+    function handleAudioAutoplay() {
+      // Try to play audio (will work if user has interacted with page)
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            isPlaying = true;
+            miniPlayPause.textContent = '❚❚';
+            // Hide player after 5 seconds
+            hidePlayerTimeout = setTimeout(() => {
+              miniPlayer.classList.add('hidden');
+            }, 5000);
+          })
+          .catch(error => {
+            // Autoplay was prevented - show play button
+            isPlaying = false;
+            miniPlayPause.textContent = '▶';
+            
+            // Add a one-time click handler to start audio on first interaction
+            const startOnInteraction = () => {
+              audio.play().then(() => {
+                isPlaying = true;
+                miniPlayPause.textContent = '❚❚';
+                hidePlayerTimeout = setTimeout(() => {
+                  miniPlayer.classList.add('hidden');
+                }, 5000);
+              }).catch(e => console.log('Playback error:', e));
+              document.removeEventListener('click', startOnInteraction);
+            };
+            
+            document.addEventListener('click', startOnInteraction);
+          });
+      }
     }
+    
+    // Initialize audio when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Fix for the "th" superscript - ensure it's properly rendered
+      const dateElement = document.querySelector('.text-lg.sm\\:text-xl');
+      if (dateElement) {
+        dateElement.innerHTML = dateElement.innerHTML.replace('27<sup>th</sup>', '27<sup>th</sup>');
+      }
+      
+      // Handle audio autoplay
+      handleAudioAutoplay();
+    });
     
     // Countdown Timer
     const countdown = () => {
