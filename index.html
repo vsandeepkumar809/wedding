@@ -124,6 +124,19 @@
       bottom: -1rem;
       right: 0.5rem;
     }
+    .glass-button {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      color: black;
+    }
+    .glass-button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
   </style>
 </head>
 <body>
@@ -133,13 +146,6 @@
       <div class="flex justify-center">
         <img src="https://www.dropbox.com/scl/fi/e3pks83zxpx2yg5lrswk6/download.jpeg?rlkey=8zjgwq6qbe3sc6pto8ea9u45a&raw=1" 
              alt="Jesus Cross" class="h-20"/>
-      </div>
-      
-      <!-- Couple Photo -->
-      <div class="relative">
-        <img id="coupleImage" src="https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1" 
-             alt="Sandeep & Suhasini" class="photo-frame rounded-lg floating"/>
-        <div class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 text-4xl pulse">❤️</div>
       </div>
       
       <!-- Wedding Title -->
@@ -206,16 +212,16 @@
       
       <!-- Action Buttons -->
       <div class="flex flex-wrap justify-center gap-3 mt-6">
-        <a href="tel:+919542181245" class="bg-pink-600 text-white font-semibold px-4 py-2 rounded-full hover:bg-pink-700 transition">
+        <a href="tel:+919542181245" class="glass-button font-semibold px-4 py-2 rounded-full transition">
           📞 RSVP
         </a>
         <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T110000Z/20250627T130000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" 
-                class="bg-purple-600 text-white font-semibold px-4 py-2 rounded-full hover:bg-purple-700 transition">
-          🗓️ Calendar
+                class="glass-button font-semibold px-4 py-2 rounded-full transition">
+          🗓️ Add to Calendar
         </button>
         <a href="https://maps.app.goo.gl/NKV6TcAgJKDWrv8a6" target="_blank" 
-           class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-full hover:bg-blue-700 transition">
-          📍 Map
+           class="glass-button font-semibold px-4 py-2 rounded-full transition">
+          📍 Click for Location
         </a>
       </div>
       
@@ -343,26 +349,6 @@
     
     countdown();
     setInterval(countdown, 1000);
-    
-    // Image Carousel
-    const images = [
-      "https://www.dropbox.com/scl/fi/x4smffj5ayafjg6elz7ps/SUHA.png?rlkey=pohtpm9wcuidmvtiscy8qtc50&raw=1",
-      "https://www.dropbox.com/scl/fi/2y37embtw608fyoa9m17s/Engage.png?rlkey=s7luyzzldhy3q5bgjrbizsez7&raw=1"
-    ];
-    let current = 0;
-    
-    const changeImage = () => {
-      current = (current + 1) % images.length;
-      document.getElementById("coupleImage").src = images[current];
-    };
-    
-    let carouselInterval = setInterval(changeImage, 5000);
-    
-    document.getElementById("coupleImage").addEventListener("click", () => {
-      clearInterval(carouselInterval);
-      changeImage();
-      carouselInterval = setInterval(changeImage, 5000);
-    });
   </script>
 </body>
 </html>
