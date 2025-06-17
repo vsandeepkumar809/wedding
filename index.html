@@ -303,21 +303,26 @@
     let isMuted = false;
     let hidePlayerTimeout;
     
+    // Function to show player and set timeout to hide
+    function showPlayer() {
+      clearTimeout(hidePlayerTimeout);
+      miniPlayer.classList.remove('hidden');
+      hidePlayerTimeout = setTimeout(() => {
+        miniPlayer.classList.add('hidden');
+      }, 3000); // Hide after 3 seconds
+    }
+    
     // Function to toggle play/pause
     function togglePlayPause() {
       if (isPlaying) {
         audio.pause();
         miniPlayPause.textContent = '▶';
-        clearTimeout(hidePlayerTimeout);
       } else {
         audio.play().catch(error => {
           console.log('Audio playback prevented:', error);
         });
         miniPlayPause.textContent = '❚❚';
-        // Hide player after 5 seconds of playback
-        hidePlayerTimeout = setTimeout(() => {
-          miniPlayer.classList.add('hidden');
-        }, 5000);
+        showPlayer(); // Show player when playing
       }
       isPlaying = !isPlaying;
     }
@@ -332,28 +337,22 @@
         muteButton.textContent = '🔇';
       }
       isMuted = !isMuted;
+      showPlayer(); // Show player when muting/unmuting
     }
     
     // Show player when tapping anywhere on screen
     document.addEventListener('click', function() {
-      miniPlayer.classList.remove('hidden');
-      // If audio is playing, set another timeout to hide after 5 seconds
-      if (isPlaying) {
-        clearTimeout(hidePlayerTimeout);
-        hidePlayerTimeout = setTimeout(() => {
-          miniPlayer.classList.add('hidden');
-        }, 5000);
-      }
+      showPlayer();
     });
     
     // Event Listeners
     miniPlayPause.addEventListener('click', function(e) {
-      e.stopPropagation(); // Prevent this click from bubbling to document
+      e.stopPropagation();
       togglePlayPause();
     });
     
     muteButton.addEventListener('click', function(e) {
-      e.stopPropagation(); // Prevent this click from bubbling to document
+      e.stopPropagation();
       toggleMute();
     });
     
@@ -363,13 +362,10 @@
     // Handle tab visibility changes
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
-        // Tab is hidden - pause audio
         if (isPlaying) {
           audio.pause();
-          // Don't update the button state so we know to resume when visible again
         }
       } else {
-        // Tab is visible again - resume if was playing
         if (isPlaying) {
           audio.play().catch(error => {
             console.log('Audio playback prevented:', error);
@@ -380,7 +376,6 @@
     
     // Function to handle audio autoplay with user interaction
     function handleAudioAutoplay() {
-      // Try to play audio (will work if user has interacted with page)
       const playPromise = audio.play();
       
       if (playPromise !== undefined) {
@@ -388,24 +383,17 @@
           .then(() => {
             isPlaying = true;
             miniPlayPause.textContent = '❚❚';
-            // Hide player after 5 seconds
-            hidePlayerTimeout = setTimeout(() => {
-              miniPlayer.classList.add('hidden');
-            }, 5000);
+            showPlayer(); // Show player when autoplay succeeds
           })
           .catch(error => {
-            // Autoplay was prevented - show play button
             isPlaying = false;
             miniPlayPause.textContent = '▶';
             
-            // Add a one-time click handler to start audio on first interaction
             const startOnInteraction = () => {
               audio.play().then(() => {
                 isPlaying = true;
                 miniPlayPause.textContent = '❚❚';
-                hidePlayerTimeout = setTimeout(() => {
-                  miniPlayer.classList.add('hidden');
-                }, 5000);
+                showPlayer(); // Show player when playback starts
               }).catch(e => console.log('Playback error:', e));
               document.removeEventListener('click', startOnInteraction);
             };
@@ -415,7 +403,7 @@
       }
     }
     
-    // Initialize audio when DOM is loaded
+    // Initialize when DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
       // Fix for the "th" superscript - ensure it's properly rendered
       const dateElement = document.querySelector('.text-lg.sm\\:text-xl');
@@ -423,7 +411,6 @@
         dateElement.innerHTML = dateElement.innerHTML.replace('27<sup>th</sup>', '27<sup class="animate-bounce animate-glow">th</sup>');
       }
       
-      // Handle audio autoplay
       handleAudioAutoplay();
     });
     
