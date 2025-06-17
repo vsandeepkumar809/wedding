@@ -182,6 +182,12 @@
       font-weight: bold;
       text-shadow: 0 0 3px rgba(236, 72, 153, 0.3);
     }
+    .heart {
+      color: #ff4081;
+      animation: pulse 1.5s infinite;
+      display: inline-block;
+      margin: 0 5px;
+    }
   </style>
 </head>
 <body>
@@ -195,7 +201,7 @@
       
       <!-- Wedding Title -->
       <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 couple-name animate-pulse">
-        Sandeep <span class="dancing-font">&</span> Suhasini
+        Sandeep <span class="heart">❤</span> Suhasini
       </h1>
       
       <!-- Bible Verse -->
@@ -216,7 +222,7 @@
       <div class="py-3">
         <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-4 py-1">
           <p class="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-            Friday, 27<sup class="animate-bounce animate-glow">th</sup> June 2025 | 5:00 PM
+            Friday, 27<sup class="animate-bounce animate-glow">th</sup> June 2025 | 4:00 PM
           </p>
         </div>
       </div>
@@ -260,7 +266,7 @@
         <a href="tel:+919542181245" class="glass-button font-semibold px-4 py-2 rounded-full transition">
           📞 RSVP
         </a>
-        <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T110000Z/20250627T130000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" 
+        <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T100000Z/20250627T120000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" 
                 class="glass-button font-semibold px-4 py-2 rounded-full transition">
           🗓️ Add to Calendar
         </button>
@@ -283,11 +289,10 @@
     <button class="mute-button" id="muteButton">🔊</button>
   </div>
   
-  <!-- Audio Element -->
-<audio id="weddingAudio" loop>
-    <source src="https://www.dropbox.com/scl/fi/isxdq2qxow2to55lxky4z/Yahova-Na-Mora-Music.mp3?rlkey=44e9dxinpzxagf2diq90tww5z&st=m4ztmqa3&dl=0" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+  <!-- Audio Element with your new audio file -->
+  <audio id="weddingAudio" loop>
+    <source src="https://www.dropbox.com/scl/fi/isxdq2qxow2to55lxky4z/Yahova-Na-Mora-Music.mp3?rlkey=44e9dxinpzxagf2diq90tww5z&st=w73fyrds&dl=1" type="audio/mpeg">
+  </audio>
 
   <script>
     // Audio Elements
@@ -425,7 +430,7 @@
     
     // Countdown Timer
     const countdown = () => {
-      const weddingDate = new Date("2025-06-27T17:00:00");
+      const weddingDate = new Date("2025-06-27T16:00:00"); // Updated to 4:00 PM (16:00 in 24-hour format)
       const now = new Date();
       const diff = weddingDate - now;
       
