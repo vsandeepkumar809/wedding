@@ -129,22 +129,21 @@
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
-    .mini-player {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 25px;
-      padding: 8px 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      transition: opacity 0.3s ease;
-      z-index: 100;
-    }
+.mini-player {
+  position: fixed;
+  bottom: 20px;
+  right: 20px; /* Changed from left: 50% and transform */
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 25px;
+  padding: 8px 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+}
     .mini-player.hidden {
       opacity: 0;
       pointer-events: none;
