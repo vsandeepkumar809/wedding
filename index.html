@@ -102,6 +102,28 @@
     .pulse {
       animation: pulse 2s infinite;
     }
+    .invitation-text {
+      background: linear-gradient(135deg, #fff0f5 0%, #f8f0ff 100%);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      position: relative;
+    }
+    .invitation-text::before, .invitation-text::after {
+      content: '"';
+      font-size: 2rem;
+      color: #d4a5c5;
+      position: absolute;
+    }
+    .invitation-text::before {
+      top: 0;
+      left: 0.5rem;
+    }
+    .invitation-text::after {
+      bottom: -1rem;
+      right: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -130,6 +152,14 @@
         <span class="text-2xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-2xl">"</span><br/>
         <span class="font-semibold text-purple-700">— Mark 10:9</span>
       </p>
+      
+      <!-- Invitation Text -->
+      <div class="invitation-text text-gray-700 text-lg">
+        With joy in our hearts and blessings from above,<br/>
+        We, Sandeep & Suhasini, invite you to celebrate our union of love.<br/><br/>
+        Your presence will make our day truly special,<br/>
+        Join us as we begin this beautiful journey together.
+      </div>
       
       <!-- Wedding Date -->
       <div class="py-3">
@@ -202,7 +232,7 @@
   </div>
   
   <!-- Audio Element -->
-  <audio id="weddingAudio" loop>
+  <audio id="weddingAudio" loop autoplay>
     <source src="https://www.dropbox.com/scl/fi/zhci7mzlq51gk5hw7nfrd/Yahova-Na-Mora-Music-Video-The-Indian-Classical-Dance-version.mp3?rlkey=ioyta2m7cf44ut5vontv68hdh&raw=1" type="audio/mpeg">
   </audio>
 
@@ -218,6 +248,9 @@
     
     // Function to handle audio play
     const handleAudio = () => {
+      // Set volume to 50% to avoid being too loud
+      audio.volume = 0.5;
+      
       // Try to play immediately (works on desktop)
       const playPromise = audio.play();
       
