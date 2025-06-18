@@ -3,91 +3,130 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Sandeep & Suhasini's Wedding</title>
+  <title>Sandeep & Suhasini's Wedding Celebration</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
+    /* Basic reset and font imports */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: transparent; /* Removes tap highlight on mobile */
     }
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #fff9fb;
       width: 100vw;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: hidden; /* Prevents horizontal scrolling */
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1rem;
-      background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M30,50 Q50,30 70,50 T90,50" fill="none" stroke="%23ffcce6" stroke-width="0.5"/></svg>');
+      background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Subtle background texture */
+      position: relative;
     }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Gradient overlay for soft lighting effect */
+      background: radial-gradient(circle at 20% 30%, rgba(255,230,240,0.8) 0%, rgba(255,240,245,0.5) 50%, transparent 80%),
+                  radial-gradient(circle at 80% 70%, rgba(240,230,255,0.8) 0%, rgba(245,240,255,0.5) 50%, transparent 80%);
+      z-index: -1; /* Ensures it stays behind content */
+      pointer-events: none; /* Allows clicks to pass through */
+    }
+    /* Custom font classes */
     .script-font {
       font-family: 'Great Vibes', cursive;
     }
     .dancing-font {
       font-family: 'Dancing Script', cursive;
     }
+    .playfair-font {
+      font-family: 'Playfair Display', serif;
+    }
+    /* Main invitation container styling */
     .invitation-container {
       width: 100%;
-      max-width: 600px;
+      max-width: 640px;
       margin: 0 auto;
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+      border-radius: 1.5rem; /* Rounded corners */
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 0 0 1px rgba(255,255,255,0.3); /* Soft shadow and subtle inner border */
       overflow: hidden;
       position: relative;
-      transform: scale(0.95);
-      opacity: 0;
+      transform: scale(0.95); /* Initial scale for entrance animation */
+      opacity: 0; /* Initial opacity for entrance animation */
+      backdrop-filter: blur(5px); /* Glassmorphism effect */
+      border: 1px solid rgba(255,255,255,0.4); /* Light border */
+      z-index: 10;
     }
+    /* Couple name styling for responsiveness and aesthetics */
     .couple-name {
-      font-size: clamp(2rem, 8vw, 3.5rem);
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: clamp(2.5rem, 10vw, 4rem); /* Responsive font size */
+      line-height: 1.1;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Subtle text shadow */
+      letter-spacing: 0; /* Adjusted to 0 for full visibility of 'S' */
     }
+    /* Padding for content sections */
     .content-padding {
       padding: 1.5rem;
     }
+    /* Responsive adjustments for larger screens */
     @media (min-width: 640px) {
       .content-padding {
-        padding: 2rem;
+        padding: 2.5rem;
+      }
+      .invitation-container {
+        max-width: 700px;
       }
     }
+    /* Keyframe Animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes float {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0px); }
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes floatReverse {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(-5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
     }
     @keyframes pulse {
       0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+    @keyframes pulseSoft {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
       100% { transform: scale(1); }
     }
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-8px); }
     }
     @keyframes glow {
-      0% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); }
-      50% { text-shadow: 0 0 15px rgba(255, 105, 180, 0.8); }
-      100% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); }
+      0% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5), 0 0 10px rgba(255,105,180,0.3); }
+      50% { text-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 20px rgba(255,105,180,0.5); }
+      100% { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5), 0 0 10px rgba(255,105,180,0.3); }
     }
     @keyframes confetti {
       0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
       100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
     }
     @keyframes containerEntrance {
-      0% { transform: scale(0.95); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+      0% { transform: scale(0.95) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
     }
     @keyframes shimmer {
       0% { background-position: -1000px 0; }
@@ -100,151 +139,202 @@
       42% { transform: scale(1.3); }
       70% { transform: scale(1); }
     }
+    @keyframes rotateSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes petalsFall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+    @keyframes borderGlow {
+      0% { box-shadow: 0 0 5px rgba(236, 72, 153, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.6); }
+      100% { box-shadow: 0 0 5px rgba(236, 72, 153, 0.3); }
+    }
+    @keyframes textFlicker {
+      0% { opacity: 0.8; }
+      50% { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+    /* Animation Utility Classes */
     .animate-fade {
-      animation: fadeIn 0.8s ease-out forwards;
+      animation: fadeIn 1s ease-out forwards;
     }
     .animate-float {
-      animation: float 3s ease-in-out infinite;
+      animation: float 4s ease-in-out infinite;
+    }
+    .animate-float-reverse {
+      animation: floatReverse 4s ease-in-out infinite;
     }
     .animate-pulse {
-      animation: pulse 2s ease-in-out infinite;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    .animate-pulse-soft {
+      animation: pulseSoft 3s ease-in-out infinite;
     }
     .animate-bounce {
-      animation: bounce 1s ease-in-out infinite;
+      animation: bounce 1.5s ease-in-out infinite;
     }
     .animate-glow {
-      animation: glow 2s ease-in-out infinite;
+      animation: glow 2.5s ease-in-out infinite;
     }
     .animate-container {
-      animation: containerEntrance 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation: containerEntrance 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
     .animate-heartbeat {
-      animation: heartBeat 1.3s ease-in-out infinite;
+      animation: heartBeat 1.5s ease-in-out infinite;
     }
+    .animate-rotate-slow {
+      animation: rotateSlow 20s linear infinite;
+    }
+    .animate-text-flicker {
+      animation: textFlicker 2s ease-in-out infinite;
+    }
+    /* Invitation text box style */
     .invitation-text {
-      background: linear-gradient(135deg, #fff0f5 0%, #f8f0ff 100%);
-      border-radius: 0.75rem;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
+      background: linear-gradient(135deg, rgba(255,240,245,0.8) 0%, rgba(248,240,255,0.8) 100%);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin: 2rem 0;
       font-style: italic;
       position: relative;
       transform: perspective(500px) rotateX(0deg);
-      transition: transform 0.5s ease;
+      transition: all 0.5s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(5px);
     }
     .invitation-text:hover {
       transform: perspective(500px) rotateX(5deg);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
     .invitation-text::before, .invitation-text::after {
       content: '"';
-      font-size: 2rem;
+      font-size: 3rem;
       color: #d4a5c5;
       position: absolute;
+      opacity: 0.6;
     }
     .invitation-text::before {
-      top: 0;
-      left: 0.5rem;
+      top: 0.5rem;
+      left: 1rem;
     }
     .invitation-text::after {
-      bottom: -1rem;
-      right: 0.5rem;
+      bottom: -1.5rem;
+      right: 1rem;
     }
+    /* Glassmorphism button style */
     .glass-button {
       backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255,255,255,0.4);
       transition: all 0.3s ease;
-      color: black;
+      color: #5a3d5c;
+      font-weight: 600;
     }
     .glass-button:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      background: rgba(255, 255, 255, 0.9);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), inset 0 0 0 1px rgba(255,255,255,0.6);
     }
+    /* Mini audio player styling */
     .mini-player {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 25px;
-      padding: 8px 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      bottom: 25px;
+      right: 25px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 10px 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      transition: all 0.3s ease;
+      gap: 12px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 100;
-      transform: translateY(20px);
-      opacity: 0;
+      opacity: 0; /* Start hidden */
+      transform: translateY(30px); /* Start slightly off-screen */
+      pointer-events: none; /* Not interactive when hidden */
+      border: 1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(5px);
     }
     .mini-player.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    .mini-player.hidden {
-      opacity: 0;
-      pointer-events: none;
+      opacity: 1; /* Fade in */
+      transform: translateY(0); /* Slide up */
+      pointer-events: auto; /* Make interactive */
     }
     .play-pause-mini {
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: linear-gradient(to right, #ec4899, #8b5cf6);
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       cursor: pointer;
       border: none;
-      font-size: 14px;
+      font-size: 16px;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(140, 72, 246, 0.4);
     }
     .play-pause-mini:hover {
       transform: scale(1.1);
+      box-shadow: 0 6px 15px rgba(140, 72, 246, 0.5);
     }
     .mute-button {
-      width: 36px;
-      height: 36px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #333;
+      color: #5a3d5c;
       cursor: pointer;
       border: none;
-      font-size: 14px;
+      font-size: 16px;
       transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.6);
     }
     .mute-button:hover {
       transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.9);
     }
+    /* Superscript styling for date */
     sup {
       font-size: 0.6em;
       vertical-align: super;
       color: #ec4899;
       font-weight: bold;
-      text-shadow: 0 0 3px rgba(236, 72, 153, 0.3);
+      text-shadow: 0 0 5px rgba(236, 72, 153, 0.3);
     }
+    /* Heart icon styling */
     .heart {
       color: #ff4081;
       animation: pulse 1.5s infinite;
       display: inline-block;
       margin: 0 5px;
     }
+    /* Confetti element styling (not currently used, but defined) */
     .confetti {
       position: fixed;
-      width: 10px;
-      height: 10px;
-      background-color: #f00;
+      width: 12px;
+      height: 12px;
       opacity: 0;
       z-index: 9999;
       pointer-events: none;
+      background-size: contain;
+      background-repeat: no-repeat;
     }
+    /* Countdown number styling with shimmer effect */
     .countdown-number {
       position: relative;
       overflow: hidden;
+      transition: all 0.3s ease;
     }
     .countdown-number::after {
       content: '';
@@ -253,12 +343,13 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
       transform: translateX(-100%);
     }
     .countdown-number.animate::after {
       animation: shimmer 1.5s infinite;
     }
+    /* Floating hearts background styling */
     .floating-hearts {
       position: absolute;
       width: 100%;
@@ -271,21 +362,28 @@
     .floating-heart {
       position: absolute;
       opacity: 0;
-      font-size: 20px;
+      font-size: 24px;
       color: #ff4081;
-      animation: float 5s ease-in-out infinite;
+      animation: float 6s ease-in-out infinite;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+    /* Venue image styling with hover effects */
     .venue-image {
-      transition: all 0.5s ease;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       transform: perspective(500px) rotateY(0deg);
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      border: 5px solid white;
     }
     .venue-image:hover {
-      transform: perspective(500px) rotateY(10deg);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: perspective(500px) rotateY(10deg) scale(1.03);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
+    /* Bible verse styling with underline effect on hover */
     .bible-verse {
       position: relative;
       display: inline-block;
+      transition: all 0.3s ease;
     }
     .bible-verse::after {
       content: '';
@@ -300,35 +398,179 @@
     .bible-verse:hover::after {
       width: 100%;
     }
+    .bible-verse:hover {
+      transform: translateY(-2px);
+    }
+    /* Petals falling animation container */
+    .petals-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.8;
+      z-index: 1;
+      animation: petalsFall linear infinite;
+    }
+    /* Gold border effect around the invitation container */
+    .gold-border {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 2px solid transparent;
+      border-image: linear-gradient(45deg, #ffd700, #f9a602, #ffd700);
+      border-image-slice: 1;
+      border-radius: 1.5rem;
+      pointer-events: none;
+      z-index: -1;
+      animation: borderGlow 3s infinite;
+    }
+    /* Couple photo styling */
+    .couple-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transition: all 0.5s ease;
+      margin: 0 auto;
+      margin-bottom: +40px; /* Adjusted margin to move the image slightly up, but keep names visible */
+    }
+    .couple-photo:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+    /* Section divider styling */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: #d4a5c5;
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid rgba(212, 165, 197, 0.5);
+    }
+    .section-divider::before {
+      margin-right: 1rem;
+    }
+    .section-divider::after {
+      margin-left: 1rem;
+    }
+    /* Save the Date ribbon styling */
+    .save-the-date {
+      position: absolute;
+      top: 40px; /* Adjusted position to move it down */
+      right: 20px;
+      background: linear-gradient(135deg, #ec4899, #8b5cf6);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(140, 72, 246, 0.4);
+      transform: rotate(5deg);
+      z-index: 5;
+    }
+    /* Map container styling */
+    .map-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      margin: 1.5rem 0;
+      height: 200px;
+      border: 5px solid white;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+      pointer-events: none; /* Allows map interaction beneath overlay */
+    }
   </style>
 </head>
 <body>
-  <!-- Floating Hearts Background -->
+  <!-- Petals Falling Animation Container -->
+  <div class="petals-container" id="petalsContainer"></div>
+  
+  <!-- Floating Hearts Background Container -->
   <div class="floating-hearts" id="floatingHearts"></div>
   
-  <!-- Confetti Container -->
+  <!-- Confetti Container (currently not active, can be enabled via JS) -->
   <div id="confettiContainer"></div>
   
   <div class="invitation-container animate-container">
+    <!-- Gold Border Effect for decorative frame -->
+    <div class="gold-border"></div>
+    
+    <!-- Save the Date Ribbon with Calendar Link -->
+    <div class="save-the-date animate-bounce">
+      <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini%27s+Wedding&dates=20250627T160000/20250627T170000&details=Join+us+as+Sandeep+and+Suhasini+unite+in+holy+matrimony!&location=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank" style="text-decoration: none; color: inherit;">
+        Save the Date
+      </a>
+    </div>
+    
     <div class="content-padding text-center space-y-4 relative z-10">
-      <!-- Cross Icon -->
-      <div class="flex justify-center">
+      <!-- Cross Icon (Animated Floating) -->
+      <div class="flex justify-center mb-4">
         <img src="https://media.istockphoto.com/id/2205831593/vector/christian-cross-and-green-eucalyptus-leaves.jpg?s=612x612&w=0&k=20&c=FDm3UvLtvEFv9aA6hXEZJE7QYrGM0FJ6Cp5r49r5Gj4=" 
-             alt="Jesus Cross" class="h-20 animate-float"/>
+             alt="Jesus Cross" class="h-24 animate-float"/>
       </div>
       
-      <!-- Wedding Title -->
-      <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 couple-name animate-pulse">
+      <!-- Couple Photo (Animated Pulse) -->
+      <h1 class="mb-6">
+        <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+             alt="Sandeep & Suhasini" class="couple-photo animate-pulse-soft"/>
+      </h1>
+      
+      <!-- Added new line above couple names -->
+      <p class="dancing-font text-xl text-purple-700 animate-text-flicker">
+        United in Love
+      </p>
+
+      <!-- Wedding Title with Couple Names and Heart Icon -->
+      <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 couple-name animate-glow">
         Sandeep <span class="heart animate-heartbeat">❤</span> Suhasini
       </h1>
       
-      <!-- Bible Verse -->
-      <p class="text-gray-700 italic mt-2 bible-verse">
-        <span class="text-2xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-2xl">"</span><br/>
-        <span class="font-semibold text-purple-700">— Mark 10:9</span>
+      <!-- Wedding Tagline -->
+      <p class="dancing-font text-xl text-purple-700 mb-2 animate-text-flicker">
+        Together Forever
       </p>
       
-      <!-- Invitation Text -->
+      <!-- Bible Verse -->
+      <p class="text-gray-700 italic mt-2 bible-verse">
+        <span class="text-3xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-3xl">"</span><br/>
+        <span class="playfair-font font-semibold text-purple-700">— Mark 10:9</span>
+      </p>
+      
+      <!-- Section Divider: Our Wedding -->
+      <div class="section-divider">
+        <span class="dancing-font text-lg">Our Wedding</span>
+      </div>
+      
+      <!-- Invitation Text Message -->
       <div class="invitation-text text-gray-700 text-lg">
         With joy in our hearts and blessings from above,<br/>
         We, Sandeep & Suhasini, invite you to celebrate our union of love.<br/><br/>
@@ -336,319 +578,304 @@
         Join us as we begin this beautiful journey together.
       </div>
       
-      <!-- Wedding Date -->
+      <!-- Wedding Date and Time -->
       <div class="py-3">
-        <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-4 py-1">
-          <p class="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
+        <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-6 py-2 shadow-md">
+          <p class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
             Friday, 27<sup class="animate-bounce animate-glow">th</sup> June 2025 | 4:00 PM
           </p>
         </div>
       </div>
       
-      <!-- Countdown -->
-      <div id="countdown" class="grid grid-cols-4 gap-2 text-center text-sm font-bold my-4">
-        <div class="bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition">
-          <span id="days" class="block text-2xl sm:text-3xl text-pink-600 countdown-number">0</span>
-          <span class="text-xs text-gray-600">Days</span>
+      <!-- Countdown Timer -->
+      <div id="countdown" class="grid grid-cols-4 gap-3 text-center font-bold my-6">
+        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
+          <span id="days" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
+          <span class="text-sm text-gray-600">Days</span>
         </div>
-        <div class="bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition">
-          <span id="hours" class="block text-2xl sm:text-3xl text-pink-600 countdown-number">0</span>
-          <span class="text-xs text-gray-600">Hours</span>
+        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
+          <span id="hours" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
+          <span class="text-sm text-gray-600">Hours</span>
         </div>
-        <div class="bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition">
-          <span id="minutes" class="block text-2xl sm:text-3xl text-pink-600 countdown-number">0</span>
-          <span class="text-xs text-gray-600">Minutes</span>
+        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
+          <span id="minutes" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
+          <span class="text-sm text-gray-600">Minutes</span>
         </div>
-        <div class="bg-white rounded-lg p-2 shadow-sm hover:shadow-md transition">
-          <span id="seconds" class="block text-2xl sm:text-3xl text-pink-600 countdown-number">0</span>
-          <span class="text-xs text-gray-600">Seconds</span>
+        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
+          <span id="seconds" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
+          <span class="text-sm text-gray-600">Seconds</span>
         </div>
       </div>
       
-      <!-- Venue Information -->
+      <!-- Section Divider: Venue -->
+      <div class="section-divider">
+        <span class="dancing-font text-lg">Venue</span>
+      </div>
+      
+      <!-- Venue Information and Map -->
       <div class="mt-4">
-        <div class="text-gray-800 text-base">
-          <span class="text-xl mr-1">🏰</span>Venue: 
-          <a href="https://maps.app.goo.gl/sLoa7juqbBdN1ZFB7" class="text-purple-700 underline font-semibold hover:text-pink-600 transition" target="_blank">
-            C.S.I All Saints' Church, Tirumalagiri
-          </a>
+        <div class="text-gray-800 text-lg mb-2">
+          <span class="text-2xl mr-2">🏰</span> 
+          <span class="font-semibold">C.S.I All Saints' Church, Tirumalagiri</span>
         </div>
-        <div class="flex justify-center mt-3">
+        
+        <!-- Google Map Embedded -->
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.27506990666!2d78.50856037497184!3d17.44754540136248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a55c3d73d33%3A0xd91fe5c66eee5663!2sC.S.I+All+Saints'+Church+(Tirumalagiri)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                  allowfullscreen="" loading="lazy"></iframe>
+          <div class="map-overlay"></div>
+        </div>
+        
+        <!-- Venue Image -->
+        <div class="flex justify-center mt-4">
           <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1" 
-               alt="Church Venue" class="rounded-lg h-40 sm:h-48 w-auto shadow-md venue-image"/>
+               alt="Church Venue" class="rounded-lg h-48 sm:h-56 w-auto venue-image"/>
         </div>
       </div>
       
       <!-- Action Buttons -->
-      <div class="flex flex-wrap justify-center gap-3 mt-6">
-        <a href="tel:+919542181245" class="glass-button font-semibold px-4 py-2 rounded-full transition hover:bg-pink-100">
-          📞 RSVP
+      <div class="flex flex-wrap justify-center gap-4 mt-8">
+        <a href="tel:+919542181245" class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-pink-100">
+          📞 Call to RSVP
         </a>
-        <button onclick="window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T100000Z/20250627T120000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" 
-                class="glass-button font-semibold px-4 py-2 rounded-full transition hover:bg-purple-100">
+        <button onclick="window.open('https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini%27s+Wedding&dates=20250627T160000/20250627T170000&details=Join+us+as+Sandeep+and+Suhasini+unite+in+holy+matrimony!&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" 
+                class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-purple-100">
           🗓️ Add to Calendar
         </button>
-        <a href="https://maps.app.goo.gl/NKV6TcAgJKDWrv8a6" target="_blank" 
-           class="glass-button font-semibold px-4 py-2 rounded-full transition hover:bg-blue-100">
-          📍 Click for Location
+        <a href="https://www.google.com/maps/dir/?api=1&destination=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank" 
+           class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-blue-100">
+          📍 Get Directions
         </a>
       </div>
       
       <!-- Footer -->
-      <footer class="text-xs text-gray-500 mt-6">
-        Made with <span class="text-pink-600 animate-heartbeat">❤️</span> by Sandeep
+      <footer class="text-sm text-gray-500 mt-8">
+        Made with <span class="text-pink-600 animate-heartbeat">❤️</span> by Sandeep & Suhasini
       </footer>
     </div>
   </div>
   
-  <!-- Mini Audio Player -->
+  <!-- Mini Audio Player for background music -->
   <div class="mini-player" id="miniPlayer">
     <button class="play-pause-mini" id="miniPlayPause">▶</button>
     <button class="mute-button" id="muteButton">🔊</button>
   </div>
   
-  <!-- Audio Element with your new audio file -->
+  <!-- Audio Element with loop -->
   <audio id="weddingAudio" loop>
-    <source src="https://www.dropbox.com/scl/fi/isxdq2qxow2to55lxky4z/Yahova-Na-Mora-Music.mp3?rlkey=44e9dxinpzxagf2diq90tww5z&st=w73fyrds&dl=1" type="audio/mpeg">
+    <source src="https://www.dropbox.com/scl/fi/k420tn46e95saz9csatu6/Canon-In-D-Piano-Ringtone.mp3?rlkey=dhg9d02j7c9tudymtum936u4i&dl=1" type="audio/mpeg">
   </audio>
 
   <script>
-    // Audio Elements
-    const audio = document.getElementById('weddingAudio');
-    const miniPlayer = document.getElementById('miniPlayer');
-    const miniPlayPause = document.getElementById('miniPlayPause');
-    const muteButton = document.getElementById('muteButton');
-    let isPlaying = false;
-    let isMuted = false;
-    let hidePlayerTimeout;
+    // Audio Elements and State Variables
+    var audio = document.getElementById('weddingAudio');
+    var miniPlayer = document.getElementById('miniPlayer');
+    var miniPlayPause = document.getElementById('miniPlayPause');
+    var muteButton = document.getElementById('muteButton');
+    var isPlaying = false;
+    var isMuted = false;
+    var hidePlayerTimeout; // Variable to store the timeout ID
     
-    // Function to show player and set timeout to hide
+    // Function to show the mini player for a duration and then hide it
     function showPlayer() {
-      clearTimeout(hidePlayerTimeout);
-      miniPlayer.classList.add('visible');
+      clearTimeout(hidePlayerTimeout); // Clear any existing hide timeout
+      miniPlayer.classList.add('visible'); // Make the player visible
+      // Set a new timeout to hide the player after 2 seconds
       hidePlayerTimeout = setTimeout(() => {
-        miniPlayer.classList.remove('visible');
-      }, 3000); // Hide after 3 seconds
+        miniPlayer.classList.remove('visible'); // Hide the player
+      }, 2000); // 2000 milliseconds = 2 seconds
     }
     
-    // Function to toggle play/pause
+    // Function to toggle play/pause state of the audio
     function togglePlayPause() {
       if (isPlaying) {
         audio.pause();
-        miniPlayPause.textContent = '▶';
+        miniPlayPause.textContent = '▶'; // Change button text to play icon
       } else {
-        audio.play().catch(error => {
-          console.log('Audio playback prevented:', error);
+        // Attempt to play audio. The .play() method returns a Promise.
+        audio.play().then(() => {
+          isPlaying = true;
+          miniPlayPause.textContent = '❚❚'; // Change button text to pause icon
+        }).catch(error => {
+          // Playback was prevented (e.g., by browser autoplay policy)
+          console.warn('Audio playback prevented:', error); 
+          // You could add a custom UI message here if desired, instead of an alert.
         });
-        miniPlayPause.textContent = '❚❚';
-        showPlayer(); // Show player when playing
       }
-      isPlaying = !isPlaying;
+      isPlaying = !isPlaying; // Toggle playing state
+      showPlayer(); // Show player whenever play/pause is toggled
     }
     
-    // Function to toggle mute
+    // Function to toggle mute/unmute state of the audio
     function toggleMute() {
       if (isMuted) {
         audio.muted = false;
-        muteButton.textContent = '🔊';
+        muteButton.textContent = '🔊'; // Change button text to volume on icon
       } else {
         audio.muted = true;
-        muteButton.textContent = '🔇';
+        muteButton.textContent = '🔇'; // Change button text to volume off icon
       }
-      isMuted = !isMuted;
-      showPlayer(); // Show player when muting/unmuting
+      isMuted = !isMuted; // Toggle muted state
+      showPlayer(); // Show player whenever mute is toggled
     }
     
-    // Show player when tapping anywhere on screen
+    // Event listener for the initial document click to show player and attempt play
+    // This is the primary user interaction point for browsers to allow audio playback.
+    document.addEventListener('click', function firstInteraction() {
+        showPlayer(); // Show player on first interaction
+        // Attempt to play the audio. This will likely work due to user interaction.
+        audio.play().then(() => {
+            isPlaying = true;
+            miniPlayPause.textContent = '❚❚';
+        }).catch(error => {
+            console.warn('Initial autoplay attempt failed:', error);
+            // If it still fails, the user will need to click the play button.
+        });
+        // Remove this listener after the first interaction
+        document.removeEventListener('click', firstInteraction);
+    }, { once: true }); // Use { once: true } to ensure it only runs once
+
+    // Event listener to show player on any subsequent click on the document
     document.addEventListener('click', function() {
       showPlayer();
     });
     
-    // Event Listeners
+    // Event Listeners for mini player buttons
     miniPlayPause.addEventListener('click', function(e) {
-      e.stopPropagation();
+      e.stopPropagation(); // Prevent event bubbling to document
       togglePlayPause();
     });
     
     muteButton.addEventListener('click', function(e) {
-      e.stopPropagation();
+      e.stopPropagation(); // Prevent event bubbling to document
       toggleMute();
     });
     
-    // Initialize audio
-    audio.volume = 0.5;
+    // Set initial volume for the audio
+    audio.volume = 0.4;
     
-    // Handle tab visibility changes
+    // Handle tab visibility changes to pause/play audio accordingly
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
+        // If tab is hidden, pause audio if it was playing
         if (isPlaying) {
           audio.pause();
         }
       } else {
-        if (isPlaying) {
+        // If tab becomes visible, resume audio if it was playing before hiding
+        if (isPlaying) { // Check if it *should* be playing (based on our internal state)
           audio.play().catch(error => {
-            console.log('Audio playback prevented:', error);
+            console.log('Audio playback prevented on tab switch (resume failed):', error);
           });
         }
       }
     });
     
-    // Function to handle audio autoplay with user interaction
-    function handleAudioAutoplay() {
-      const playPromise = audio.play();
-      
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            isPlaying = true;
-            miniPlayPause.textContent = '❚❚';
-            showPlayer(); // Show player when autoplay succeeds
-          })
-          .catch(error => {
-            isPlaying = false;
-            miniPlayPause.textContent = '▶';
-            
-            const startOnInteraction = () => {
-              audio.play().then(() => {
-                isPlaying = true;
-                miniPlayPause.textContent = '❚❚';
-                showPlayer(); // Show player when playback starts
-              }).catch(e => console.log('Playback error:', e));
-              document.removeEventListener('click', startOnInteraction);
-            };
-            
-            document.addEventListener('click', startOnInteraction);
-          });
-      }
-    }
-    
-    // Create floating hearts
+    // Function to create and animate floating hearts in the background
     function createFloatingHearts() {
-      const container = document.getElementById('floatingHearts');
-      const heartCount = 15;
+      var container = document.getElementById('floatingHearts'); 
+      var heartCount = 20; // Number of hearts to generate
       
-      for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
+      for (var i = 0; i < heartCount; i++) { 
+        var heart = document.createElement('div'); 
         heart.className = 'floating-heart';
-        heart.innerHTML = '❤';
-        heart.style.left = `${Math.random() * 100}%`;
-        heart.style.top = `${Math.random() * 100}%`;
-        heart.style.animationDelay = `${Math.random() * 5}s`;
-        heart.style.opacity = Math.random() * 0.5 + 0.3;
-        heart.style.fontSize = `${Math.random() * 10 + 15}px`;
+        heart.innerHTML = '❤'; // HTML entity for a heart
+        heart.style.left = `${Math.random() * 100}%`; // Random horizontal position
+        heart.style.top = `${Math.random() * 100}%`; // Random vertical position (initial)
+        heart.style.animationDelay = `${Math.random() * 5}s`; // Random delay for staggered animation
+        heart.style.opacity = Math.random() * 0.6 + 0.2; // Random opacity
+        heart.style.fontSize = `${Math.random() * 15 + 20}px`; // Random font size
+        heart.style.animationDuration = `${Math.random() * 3 + 4}s`; // Random animation duration
         container.appendChild(heart);
       }
     }
     
-    // Create confetti effect
+    // Function to create and animate falling petals in the background
+    function createFallingPetals() {
+      var container = document.getElementById('petalsContainer'); 
+      var petalCount = 15; // Number of petals to generate
+      var petalTypes = [ // URLs for different petal images
+        'https://www.freepnglogos.com/uploads/rose-petal-png/rose-petal-png-transparent-image-pngpix-0.png',
+        'https://www.freepnglogos.com/uploads/rose-petal-png/rose-petal-png-transparent-image-pngpix-3.png',
+        'https://www.freepnglogos.com/uploads/rose-petal-png/rose-petal-png-transparent-image-pngpix-4.png'
+      ];
+      
+      for (var i = 0; i < petalCount; i++) { 
+        var petal = document.createElement('div'); 
+        petal.className = 'petal';
+        petal.style.backgroundImage = `url(${petalTypes[Math.floor(Math.random() * petalTypes.length)]})`; // Random petal image
+        petal.style.left = `${Math.random() * 100}%`; // Random horizontal position
+        petal.style.width = `${Math.random() * 30 + 20}px`; // Random width
+        petal.style.height = `${Math.random() * 30 + 20}px`; // Random height
+        petal.style.animationDuration = `${Math.random() * 10 + 10}s`; // Random animation duration
+        petal.style.animationDelay = `${Math.random() * 5}s`; // Random delay for staggered animation
+        container.appendChild(petal);
+      }
+    }
+    
+    // Function to create and animate confetti effect (currently not active)
     function createConfetti() {
-      const container = document.getElementById('confettiContainer');
-      const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
-      const confettiCount = 100;
+      var container = document.getElementById('confettiContainer'); 
+      var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']; // Confetti colors
+      var shapes = ['❤', '★', '✿', '❀', '✧']; // Confetti shapes (emojis)
+      var confettiCount = 100; // Number of confetti pieces
       
-      for (let i = 0; i < confettiCount; i++) {
-        const confetti = document.createElement('div');
+      for (var i = 0; i < confettiCount; i++) { 
+        var confetti = document.createElement('div'); 
         confetti.className = 'confetti';
-        confetti.style.left = `${Math.random() * 100}vw`;
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.width = `${Math.random() * 10 + 5}px`;
-        confetti.style.height = `${Math.random() * 10 + 5}px`;
-        confetti.style.borderRadius = `${Math.random() > 0.5 ? '50%' : '0'}`;
-        confetti.style.animation = `confetti ${Math.random() * 3 + 2}s linear forwards`;
-        confetti.style.animationDelay = `${Math.random() * 2}s`;
+        confetti.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        confetti.style.animationDelay = `${Math.random() * 5}s`; // Random delay
+        confetti.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Random color
+        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape
+        confetti.style.animationName = 'confetti'; // Apply confetti animation
         container.appendChild(confetti);
+      }
+    }
+    
+    // Countdown Timer function
+    function startCountdown() {
+      // Set the wedding date and time
+      var countdownDate = new Date("June 27, 2025 16:00:00").getTime();
+      
+      var x = setInterval(function() {
+        var now = new Date().getTime(); // Current date and time
+        var distance = countdownDate - now; // Distance between now and the countdown date
         
-        // Remove confetti after animation
-        setTimeout(() => {
-          confetti.remove();
-        }, 5000);
-      }
+        // Calculate days, hours, minutes, and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Update the HTML elements with the calculated values
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+        
+        // If the countdown is over, display a message
+        if (distance < 0) {
+          clearInterval(x); // Stop the countdown
+          document.getElementById("countdown").innerHTML = "<p class='text-2xl text-pink-600 font-bold'>The day has arrived!</p>";
+        }
+      }, 1000); // Update every second
     }
     
-    // Trigger confetti on certain events
-    function triggerConfetti() {
-      createConfetti();
-    }
-    
-    // Initialize when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Fix for the "th" superscript - ensure it's properly rendered
-      const dateElement = document.querySelector('.text-lg.sm\\:text-xl');
-      if (dateElement) {
-        dateElement.innerHTML = dateElement.innerHTML.replace('27<sup>th</sup>', '27<sup class="animate-bounce animate-glow">th</sup>');
-      }
+    // Run all initialization functions when the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Animate the main invitation container into view
+      document.querySelector('.invitation-container').style.opacity = '1';
+      document.querySelector('.invitation-container').style.transform = 'scale(1)';
       
-      // Create floating hearts
-      createFloatingHearts();
-      
-      // Trigger confetti when page loads
-      setTimeout(triggerConfetti, 1000);
-      
-      // Trigger confetti when clicking on the couple name
-      const coupleName = document.querySelector('.couple-name');
-      coupleName.addEventListener('click', triggerConfetti);
-      
-      // Add shimmer effect to countdown numbers when they change
-      const countdownNumbers = document.querySelectorAll('.countdown-number');
-      
-      handleAudioAutoplay();
+      createFloatingHearts(); // Start floating hearts animation
+      createFallingPetals(); // Start falling petals animation
+      startCountdown(); // Start the wedding countdown
+      // createConfetti(); // Optional: Uncomment to enable confetti animation
+
+      // Show the player briefly on page load
+      showPlayer();
     });
-    
-    // Countdown Timer
-    const countdown = () => {
-      const weddingDate = new Date("2025-06-27T16:00:00"); // Updated to 4:00 PM (16:00 in 24-hour format)
-      const now = new Date();
-      const diff = weddingDate - now;
-      
-      if (diff <= 0) {
-        document.getElementById("countdown").innerHTML = `
-          <div class="col-span-4 py-3">
-            <div class="text-xl sm:text-2xl font-bold text-pink-600 animate-pulse">
-              The Big Day is Here! 🎉
-            </div>
-          </div>
-        `;
-        // Trigger continuous confetti when countdown reaches zero
-        setInterval(triggerConfetti, 3000);
-        return;
-      }
-      
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
-      
-      // Add animation class when numbers change
-      const daysElement = document.getElementById("days");
-      const hoursElement = document.getElementById("hours");
-      const minutesElement = document.getElementById("minutes");
-      const secondsElement = document.getElementById("seconds");
-      
-      if (daysElement.textContent != days) {
-        daysElement.classList.add('animate');
-        setTimeout(() => daysElement.classList.remove('animate'), 1500);
-      }
-      if (hoursElement.textContent != hours) {
-        hoursElement.classList.add('animate');
-        setTimeout(() => hoursElement.classList.remove('animate'), 1500);
-      }
-      if (minutesElement.textContent != minutes) {
-        minutesElement.classList.add('animate');
-        setTimeout(() => minutesElement.classList.remove('animate'), 1500);
-      }
-      if (secondsElement.textContent != seconds) {
-        secondsElement.classList.add('animate');
-        setTimeout(() => secondsElement.classList.remove('animate'), 1500);
-      }
-      
-      daysElement.textContent = days;
-      hoursElement.textContent = hours;
-      minutesElement.textContent = minutes;
-      secondsElement.textContent = seconds;
-    };
-    
-    countdown();
-    setInterval(countdown, 1000);
   </script>
 </body>
 </html>
