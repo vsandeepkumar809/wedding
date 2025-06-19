@@ -541,7 +541,7 @@
       
       <!-- Couple Photo (Animated Pulse) -->
       <h1 class="mb-6">
-        <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/144663783/456806811-3173fe13-6447-4bc0-a5e7-11b494f4b2cb.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250619%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250619T043251Z&X-Amz-Expires=300&X-Amz-Signature=926191fbd7fd5d6acd59afc58c806578fb433708f1188e607ea3a46a3a4ffc4d&X-Amz-SignedHeaders=host" 
+        <img src="https://www.dropbox.com/scl/fi/ol2bf0udayh8853ps1g60/Wedin.png?rlkey=am0vgxlel5orzdnle7ify2hxc&st=5i30ycvt&dl=0" 
              alt="Sandeep & Suhasini" class="couple-photo animate-pulse-soft"/>
       </h1>
       
@@ -676,6 +676,7 @@
     var isPlaying = false;
     var isMuted = false;
     var hidePlayerTimeout; // Variable to store the timeout ID
+    var hasScrolled = false; // Track if user has scrolled
     
     // Function to show the mini player for a duration and then hide it
     function showPlayer() {
@@ -720,21 +721,20 @@
       showPlayer(); // Show player whenever mute is toggled
     }
     
-    // Event listener for the initial document click to show player and attempt play
-    // This is the primary user interaction point for browsers to allow audio playback.
-    document.addEventListener('click', function firstInteraction() {
-        showPlayer(); // Show player on first interaction
-        // Attempt to play the audio. This will likely work due to user interaction.
+    // Event listener for scrolling to play music
+    window.addEventListener('scroll', function() {
+      if (!hasScrolled) {
+        hasScrolled = true;
+        // Attempt to play the audio when user scrolls
         audio.play().then(() => {
-            isPlaying = true;
-            miniPlayPause.textContent = '❚❚';
+          isPlaying = true;
+          miniPlayPause.textContent = '❚❚';
+          showPlayer(); // Show the player controls
         }).catch(error => {
-            console.warn('Initial autoplay attempt failed:', error);
-            // If it still fails, the user will need to click the play button.
+          console.warn('Audio playback on scroll prevented:', error);
         });
-        // Remove this listener after the first interaction
-        document.removeEventListener('click', firstInteraction);
-    }, { once: true }); // Use { once: true } to ensure it only runs once
+      }
+    }, { once: true }); // Only trigger once on first scroll
 
     // Event listener to show player on any subsequent click on the document
     document.addEventListener('click', function() {
