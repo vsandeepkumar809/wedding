@@ -445,7 +445,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       transition: all 0.5s ease;
       margin: 0 auto;
-      margin-bottom: -20px; /* Adjusted margin to properly position the photo */
+      margin-bottom: +40px; /* Adjusted margin to move the image slightly up, but keep names visible */
     }
     .couple-photo:hover {
       transform: scale(1.05) rotate(5deg);
@@ -539,13 +539,9 @@
              alt="Jesus Cross" class="h-24 animate-float"/>
       </div>
       
-      <!-- Couple Photo (Animated Pulse) - Fixed image URL -->
+      <!-- Couple Photo (Animated Pulse) -->
       <h1 class="mb-6">
-        <img src="https://github.com/user-attachments/assets/5b8d4879-1c59-4e69-8151-4ae040b90b2f" 
-             alt="Sandeep & Suhasini" class="couple-photo animate-pulse-soft"/>
-      </h1>
-      
-      <!-- Added new line above couple names -->
+        <img src="https://github.com/user-attachments/assets/5b8d4879-1c59-4e69-8151-4ae040b90b2f"
       <p class="dancing-font text-xl text-purple-700 animate-text-flicker">
         United in Love
       </p>
@@ -676,7 +672,6 @@
     var isPlaying = false;
     var isMuted = false;
     var hidePlayerTimeout; // Variable to store the timeout ID
-    var hasInteracted = false; // Track if user has interacted
     
     // Function to show the mini player for a duration and then hide it
     function showPlayer() {
@@ -701,8 +696,7 @@
         }).catch(error => {
           // Playback was prevented (e.g., by browser autoplay policy)
           console.warn('Audio playback prevented:', error); 
-          // Show a message to the user to interact first
-          alert('Please tap anywhere on the page to enable music playback');
+          // You could add a custom UI message here if desired, instead of an alert.
         });
       }
       isPlaying = !isPlaying; // Toggle playing state
@@ -722,26 +716,22 @@
       showPlayer(); // Show player whenever mute is toggled
     }
     
-    // Function to handle initial user interaction
-    function handleFirstInteraction() {
-      if (!hasInteracted) {
-        hasInteracted = true;
-        // Attempt to play the audio when user interacts
+    // Event listener for the initial document click to show player and attempt play
+    // This is the primary user interaction point for browsers to allow audio playback.
+    document.addEventListener('click', function firstInteraction() {
+        showPlayer(); // Show player on first interaction
+        // Attempt to play the audio. This will likely work due to user interaction.
         audio.play().then(() => {
-          isPlaying = true;
-          miniPlayPause.textContent = '❚❚';
-          showPlayer(); // Show the player controls
+            isPlaying = true;
+            miniPlayPause.textContent = '❚❚';
         }).catch(error => {
-          console.warn('Audio playback on interaction prevented:', error);
+            console.warn('Initial autoplay attempt failed:', error);
+            // If it still fails, the user will need to click the play button.
         });
-      }
-    }
-    
-    // Event listeners for various user interactions
-    document.addEventListener('click', handleFirstInteraction);
-    document.addEventListener('touchstart', handleFirstInteraction);
-    document.addEventListener('scroll', handleFirstInteraction);
-    
+        // Remove this listener after the first interaction
+        document.removeEventListener('click', firstInteraction);
+    }, { once: true }); // Use { once: true } to ensure it only runs once
+
     // Event listener to show player on any subsequent click on the document
     document.addEventListener('click', function() {
       showPlayer();
@@ -820,6 +810,26 @@
       }
     }
     
+    // Function to create and animate confetti effect (currently not active)
+    function createConfetti() {
+      var container = document.getElementById('confettiContainer'); 
+      var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']; // Confetti colors
+      var shapes = ['❤', '★', '✿', '❀', '✧']; // Confetti shapes (emojis)
+      var confettiCount = 100; // Number of confetti pieces
+      
+      for (var i = 0; i < confettiCount; i++) { 
+        var confetti = document.createElement('div'); 
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        confetti.style.animationDelay = `${Math.random() * 5}s`; // Random delay
+        confetti.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Random color
+        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape
+        confetti.style.animationName = 'confetti'; // Apply confetti animation
+        container.appendChild(confetti);
+      }
+    }
+    
     // Countdown Timer function
     function startCountdown() {
       // Set the wedding date and time
@@ -858,6 +868,7 @@
       createFloatingHearts(); // Start floating hearts animation
       createFallingPetals(); // Start falling petals animation
       startCountdown(); // Start the wedding countdown
+      // createConfetti(); // Optional: Uncomment to enable confetti animation
 
       // Show the player briefly on page load
       showPlayer();
