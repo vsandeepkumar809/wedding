@@ -439,13 +439,13 @@
     .couple-photo {
       width: 180px;
       height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
+      border-radius: 50%; /* Makes the image circular */
+      object-fit: cover; /* Ensures the image covers the circular area */
       border: 5px solid white;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       transition: all 0.5s ease;
-      margin: 0 auto;
-      margin-bottom: +40px; /* Adjusted margin to move the image slightly up, but keep names visible */
+      /* margin: 0 auto; Removed as flexbox on parent handles centering */
+      margin-bottom: 20px; /* Adjusted margin to move the image slightly up from names */
     }
     .couple-photo:hover {
       transform: scale(1.05) rotate(5deg);
@@ -512,69 +512,59 @@
   </style>
 </head>
 <body>
-  <!-- Petals Falling Animation Container -->
   <div class="petals-container" id="petalsContainer"></div>
-  
-  <!-- Floating Hearts Background Container -->
+
   <div class="floating-hearts" id="floatingHearts"></div>
-  <!-- Confetti Container (currently not active, can be enabled via JS) -->
   <div id="confettiContainer"></div>
-  
+
   <div class="invitation-container animate-container">
-    <!-- Gold Border Effect for decorative frame -->
     <div class="gold-border"></div>
-    
-    <!-- Save the Date Ribbon with Calendar Link -->
+
     <div class="save-the-date animate-bounce">
       <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini%27s+Wedding&dates=20250627T160000/20250627T170000&details=Join+us+as+Sandeep+and+Suhasini+unite+in+holy+matrimony!&location=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank" style="text-decoration: none; color: inherit;">
         Save the Date
       </a>
     </div>
-    
+
     <div class="content-padding text-center space-y-4 relative z-10">
-      <!-- Cross Icon (Animated Floating) -->
       <div class="flex justify-center mb-4">
-        <img src="https://media.istockphoto.com/id/2205831593/vector/christian-cross-and-green-eucalyptus-leaves.jpg?s=612x612&w=0&k=20&c=FDm3UvLtvEFv9aA6hXEZJE7QYrGM0FJ6Cp5r49r5Gj4=" 
+        <img src="https://media.istockphoto.com/id/2205831593/vector/christian-cross-and-green-eucalyptus-leaves.jpg?s=612x612&w=0&k=20&c=FDm3UvLtvEFv9aA6hXEZJE7QYrGM0FJ6Cp5r49r5Gj4="
              alt="Jesus Cross" class="h-24 animate-float"/>
       </div>
-      
-      <!-- Couple Photo (Animated Pulse) -->
-      <h1 class="mb-6">
-        <img src="https://github.com/user-attachments/assets/5b8d4879-1c59-4e69-8151-4ae040b90b2f"
+
+      <div class="flex justify-center mb-4">
+        <img src="https://i.ibb.co/39cJs6ss/Wedin.png"
+             alt="Couple Photo" class="couple-photo animate-pulse-soft" />
+      </div>
+
       <p class="dancing-font text-xl text-purple-700 animate-text-flicker">
         United in Love
       </p>
 
-      <!-- Wedding Title with Couple Names and Heart Icon -->
       <h1 class="script-font text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 couple-name animate-glow">
         Sandeep <span class="heart animate-heartbeat">❤</span> Suhasini
       </h1>
-      
-      <!-- Wedding Tagline -->
+
       <p class="dancing-font text-xl text-purple-700 mb-2 animate-text-flicker">
         Together Forever
       </p>
-      
-      <!-- Bible Verse -->
+
       <p class="text-gray-700 italic mt-2 bible-verse">
         <span class="text-3xl">"</span>Therefore what God has joined together, let no one separate.<span class="text-3xl">"</span><br/>
         <span class="playfair-font font-semibold text-purple-700">— Mark 10:9</span>
       </p>
-      
-      <!-- Section Divider: Our Wedding -->
+
       <div class="section-divider">
         <span class="dancing-font text-lg">Our Wedding</span>
       </div>
-      
-      <!-- Invitation Text Message -->
+
       <div class="invitation-text text-gray-700 text-lg">
         With joy in our hearts and blessings from above,<br/>
         We, Sandeep & Suhasini, invite you to celebrate our union of love.<br/><br/>
         Your presence will make our day truly special,<br/>
         Join us as we begin this beautiful journey together.
       </div>
-      
-      <!-- Wedding Date and Time -->
+
       <div class="py-3">
         <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-6 py-2 shadow-md">
           <p class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
@@ -582,8 +572,7 @@
           </p>
         </div>
       </div>
-      
-      <!-- Countdown Timer -->
+
       <div id="countdown" class="grid grid-cols-4 gap-3 text-center font-bold my-6">
         <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
           <span id="days" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
@@ -602,62 +591,54 @@
           <span class="text-sm text-gray-600">Seconds</span>
         </div>
       </div>
-      
-      <!-- Section Divider: Venue -->
+
       <div class="section-divider">
         <span class="dancing-font text-lg">Venue</span>
       </div>
-      
-      <!-- Venue Information and Map -->
+
       <div class="mt-4">
         <div class="text-gray-800 text-lg mb-2">
-          <span class="text-2xl mr-2">🏰</span> 
+          <span class="text-2xl mr-2">🏰</span>
           <span class="font-semibold">C.S.I All Saints' Church, Tirumalagiri</span>
         </div>
-        
-        <!-- Google Map Embedded -->
+
         <div class="map-container">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.27506990666!2d78.50856037497184!3d17.44754540136248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a55c3d73d33%3A0xd91fe5c66eee5663!2sC.S.I+All+Saints'+Church+(Tirumalagiri)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.27506990666!2d78.50856037497184!3d17.44754540136248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a55c3d73d33%3A0xd91fe5c66eee5663!2sC.S.I+All+Saints'+Church+(Tirumalagiri)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   allowfullscreen="" loading="lazy"></iframe>
           <div class="map-overlay"></div>
         </div>
-        
-        <!-- Venue Image -->
+
         <div class="flex justify-center mt-4">
-          <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1" 
+          <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1"
                alt="Church Venue" class="rounded-lg h-48 sm:h-56 w-auto venue-image"/>
         </div>
       </div>
-      
-      <!-- Action Buttons -->
+
       <div class="flex flex-wrap justify-center gap-4 mt-8">
         <a href="tel:+919542181245" class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-pink-100">
           📞 Call to RSVP
         </a>
-        <button onclick="window.open('https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T100000Z/20250627T120000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')" 
+        <button onclick="window.open('https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T100000Z/20250627T120000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')"
                 class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-purple-100">
           🗓️ Add to Calendar
         </button>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank" 
+        <a href="https://www.google.com/maps/dir/?api=1&destination=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank"
            class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-blue-100">
           📍 Get Directions
         </a>
       </div>
-      
-      <!-- Footer -->
+
       <footer class="text-sm text-gray-500 mt-8">
         Made with <span class="text-pink-600 animate-heartbeat">❤️</span> by Sandeep
       </footer>
     </div>
   </div>
-  
-  <!-- Mini Audio Player for background music -->
+
   <div class="mini-player" id="miniPlayer">
     <button class="play-pause-mini" id="miniPlayPause">▶</button>
     <button class="mute-button" id="muteButton">🔊</button>
   </div>
-  
-  <!-- Audio Element with loop -->
+
   <audio id="weddingAudio" loop>
     <source src="https://www.dropbox.com/scl/fi/k420tn46e95saz9csatu6/Canon-In-D-Piano-Ringtone.mp3?rlkey=dhg9d02j7c9tudymtum936u4i&dl=1" type="audio/mpeg">
   </audio>
@@ -671,7 +652,7 @@
     var isPlaying = false;
     var isMuted = false;
     var hidePlayerTimeout; // Variable to store the timeout ID
-    
+
     // Function to show the mini player for a duration and then hide it
     function showPlayer() {
       clearTimeout(hidePlayerTimeout); // Clear any existing hide timeout
@@ -681,7 +662,7 @@
         miniPlayer.classList.remove('visible'); // Hide the player
       }, 2000); // 2000 milliseconds = 2 seconds
     }
-    
+
     // Function to toggle play/pause state of the audio
     function togglePlayPause() {
       if (isPlaying) {
@@ -694,14 +675,14 @@
           miniPlayPause.textContent = '❚❚'; // Change button text to pause icon
         }).catch(error => {
           // Playback was prevented (e.g., by browser autoplay policy)
-          console.warn('Audio playback prevented:', error); 
+          console.warn('Audio playback prevented:', error);
           // You could add a custom UI message here if desired, instead of an alert.
         });
       }
       isPlaying = !isPlaying; // Toggle playing state
       showPlayer(); // Show player whenever play/pause is toggled
     }
-    
+
     // Function to toggle mute/unmute state of the audio
     function toggleMute() {
       if (isMuted) {
@@ -714,7 +695,7 @@
       isMuted = !isMuted; // Toggle muted state
       showPlayer(); // Show player whenever mute is toggled
     }
-    
+
     // Event listener for the initial document click to show player and attempt play
     // This is the primary user interaction point for browsers to allow audio playback.
     document.addEventListener('click', function firstInteraction() {
@@ -735,21 +716,21 @@
     document.addEventListener('click', function() {
       showPlayer();
     });
-    
+
     // Event Listeners for mini player buttons
     miniPlayPause.addEventListener('click', function(e) {
       e.stopPropagation(); // Prevent event bubbling to document
       togglePlayPause();
     });
-    
+
     muteButton.addEventListener('click', function(e) {
       e.stopPropagation(); // Prevent event bubbling to document
       toggleMute();
     });
-    
+
     // Set initial volume for the audio
     audio.volume = 0.4;
-    
+
     // Handle tab visibility changes to pause/play audio accordingly
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
@@ -766,14 +747,14 @@
         }
       }
     });
-    
+
     // Function to create and animate floating hearts in the background
     function createFloatingHearts() {
-      var container = document.getElementById('floatingHearts'); 
+      var container = document.getElementById('floatingHearts');
       var heartCount = 20; // Number of hearts to generate
-      
-      for (var i = 0; i < heartCount; i++) { 
-        var heart = document.createElement('div'); 
+
+      for (var i = 0; i < heartCount; i++) {
+        var heart = document.createElement('div');
         heart.className = 'floating-heart';
         heart.innerHTML = '❤'; // HTML entity for a heart
         heart.style.left = `${Math.random() * 100}%`; // Random horizontal position
@@ -785,19 +766,19 @@
         container.appendChild(heart);
       }
     }
-    
+
     // Function to create and animate falling petals in the background
     function createFallingPetals() {
-      var container = document.getElementById('petalsContainer'); 
+      var container = document.getElementById('petalsContainer');
       var petalCount = 15; // Number of petals to generate
       var petalTypes = [ // URLs for different petal images
         'https://www.freepnglogos.com/uploads/rose-petal-png/rose-petal-png-transparent-image-pngpix-0.png',
         'https://www.freepnglogos.com/uploads/rose-petal-png/rose-petal-png-transparent-image-pngpix-3.png',
         'https://www.freepnglogos.com/uploads/rose-petal-png/rose-petal-png-transparent-image-pngpix-4.png'
       ];
-      
-      for (var i = 0; i < petalCount; i++) { 
-        var petal = document.createElement('div'); 
+
+      for (var i = 0; i < petalCount; i++) {
+        var petal = document.createElement('div');
         petal.className = 'petal';
         petal.style.backgroundImage = `url(${petalTypes[Math.floor(Math.random() * petalTypes.length)]})`; // Random petal image
         petal.style.left = `${Math.random() * 100}%`; // Random horizontal position
@@ -808,16 +789,16 @@
         container.appendChild(petal);
       }
     }
-    
+
     // Function to create and animate confetti effect (currently not active)
     function createConfetti() {
-      var container = document.getElementById('confettiContainer'); 
+      var container = document.getElementById('confettiContainer');
       var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']; // Confetti colors
       var shapes = ['❤', '★', '✿', '❀', '✧']; // Confetti shapes (emojis)
       var confettiCount = 100; // Number of confetti pieces
-      
-      for (var i = 0; i < confettiCount; i++) { 
-        var confetti = document.createElement('div'); 
+
+      for (var i = 0; i < confettiCount; i++) {
+        var confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = `${Math.random() * 100}vw`; // Random horizontal position
         confetti.style.animationDelay = `${Math.random() * 5}s`; // Random delay
@@ -828,49 +809,49 @@
         container.appendChild(confetti);
       }
     }
-    
+
     // Countdown Timer function
     function startCountdown() {
       // Set the wedding date and time
       var countdownDate = new Date("June 27, 2025 16:00:00").getTime();
-      
+
       var x = setInterval(function() {
-        var now = new Date().getTime(); // Current date and time
-        var distance = countdownDate - now; // Distance between now and the countdown date
-        
-        // Calculate days, hours, minutes, and seconds
+        var now = new Date().getTime();
+        var distance = countdownDate - now;
+
+        // Calculate days, hours, minutes, seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
         var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        // Update the HTML elements with the calculated values
+
+        // Display the results in the elements
         document.getElementById("days").textContent = days;
         document.getElementById("hours").textContent = hours;
         document.getElementById("minutes").textContent = minutes;
         document.getElementById("seconds").textContent = seconds;
-        
-        // If the countdown is over, display a message
-        if (distance < 0) {
-          clearInterval(x); // Stop the countdown
-          document.getElementById("countdown").innerHTML = "<p class='text-2xl text-pink-600 font-bold'>The day has arrived!</p>";
-        }
-      }, 1000); // Update every second
-    }
-    
-    // Run all initialization functions when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      // Animate the main invitation container into view
-      document.querySelector('.invitation-container').style.opacity = '1';
-      document.querySelector('.invitation-container').style.transform = 'scale(1)';
-      
-      createFloatingHearts(); // Start floating hearts animation
-      createFallingPetals(); // Start falling petals animation
-      startCountdown(); // Start the wedding countdown
-      // createConfetti(); // Optional: Uncomment to enable confetti animation
 
-      // Show the player briefly on page load
-      showPlayer();
+        // Add shimmer effect to numbers on update
+        document.querySelectorAll('.countdown-number').forEach(el => {
+          el.classList.remove('animate');
+          void el.offsetWidth; // Trigger reflow
+          el.classList.add('animate');
+        });
+
+
+        // If the countdown is over, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("countdown").innerHTML = "<p class='text-2xl text-pink-600 font-bold'>The wedding has begun!</p>";
+        }
+      }, 1000);
+    }
+
+    // Initialize floating hearts and petals on load
+    document.addEventListener('DOMContentLoaded', function() {
+      createFloatingHearts();
+      createFallingPetals();
+      startCountdown(); // Start the countdown when the DOM is fully loaded
     });
   </script>
 </body>
