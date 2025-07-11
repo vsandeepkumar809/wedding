@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Sandeep & Suhasini's Wedding Invitation</title>
+  <title>Sandeep & Suhasini's Wedding</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -485,29 +485,24 @@
       /* Increased z-index to ensure it's clickable */
       z-index: 20;
     }
-    /* Map container styling */
-    .map-container {
+    /* YouTube video container */
+    .video-container {
       position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
       overflow: hidden;
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       margin: 1.5rem 0;
-      height: 200px;
       border: 5px solid white;
     }
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    .map-overlay {
+    .video-container iframe {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-      pointer-events: none; /* Allows map interaction beneath overlay */
+      border: none;
     }
   </style>
 </head>
@@ -521,8 +516,8 @@
     <div class="gold-border"></div>
 
     <div class="save-the-date animate-bounce">
-      <a href="https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini%27s+Wedding&dates=20250627T160000/20250627T170000&details=Join+us+as+Sandeep+and+Suhasini+unite+in+holy+matrimony!&location=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank" style="text-decoration: none; color: inherit;">
-        Save the Date
+      <a href="https://www.youtube.com/watch?v=R3agKEJAB6c&t=518s" target="_blank" style="text-decoration: none; color: inherit;">
+        Wedding Memories
       </a>
     </div>
 
@@ -560,102 +555,42 @@
 
       <div class="invitation-text text-gray-700 text-lg">
         With joy in our hearts and blessings from above,<br/>
-        We, Sandeep & Suhasini, invite you to celebrate our union of love.<br/><br/>
-        Your presence will make our day truly special,<br/>
-        Join us as we begin this beautiful journey together.
+        We, Sandeep & Suhasini, invite you to relive our union of love.<br/><br/>
+        Thank you for being part of our special day,<br/>
+        And for celebrating with us as we began this beautiful journey together.
       </div>
 
       <div class="py-3">
-        <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-6 py-2 shadow-md">
+        <div class="inline-block bg-gradient-to-r from-pink-100 to-purple-100 rounded-full px-6 py-3 shadow-md">
           <p class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-            Friday, 27<sup class="animate-bounce animate-glow">th</sup> June 2025 | 5:00 PM
+            Our wedding was held on June 27<sup class="animate-bounce animate-glow">th</sup> 2025
           </p>
-        </div>
-      </div>
-
-            <!-- Wedding Dinner Time -->
-      <div class="my-6 text-center">
-        <div class="inline-block bg-gradient-to-r from-pink-50 to-purple-50 rounded-full px-6 py-3 shadow-md">
-          <p class="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600">
-            Reception and dinner | 7:00 PM Onwards
-          </p>
-        </div>
-      </div>
-
-      <div id="countdown" class="grid grid-cols-4 gap-3 text-center font-bold my-6">
-        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
-          <span id="days" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
-          <span class="text-sm text-gray-600">Days</span>
-        </div>
-        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
-          <span id="hours" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
-          <span class="text-sm text-gray-600">Hours</span>
-        </div>
-        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
-          <span id="minutes" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
-          <span class="text-sm text-gray-600">Minutes</span>
-        </div>
-        <div class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg transition">
-          <span id="seconds" class="block text-3xl sm:text-4xl text-pink-600 countdown-number">0</span>
-          <span class="text-sm text-gray-600">Seconds</span>
         </div>
       </div>
 
       <div class="section-divider">
-        <span class="dancing-font text-lg">Venue</span>
+        <span class="dancing-font text-lg">Wedding Video</span>
       </div>
 
-      <div class="mt-4">
-        <div class="text-gray-800 text-lg mb-2">
-          <span class="text-2xl mr-2">🏰</span>
-          <span class="font-semibold">C.S.I All Saints' Church, Tirumalagiri</span>
+      <div class="mt-6 text-center">
+        <div class="text-gray-800 text-lg mb-4">
+          <span class="text-2xl mr-2">🎥</span>
+          <span class="font-semibold">Relive Our Special Day</span>
         </div>
-
-        <!-- Add this after the venue section -->
-<div class="section-divider">
-  <span class="dancing-font text-lg">Wedding Video</span>
-</div>
-
-<div class="mt-6 text-center">
-  <div class="text-gray-800 text-lg mb-4">
-    <span class="text-2xl mr-2">🎥</span>
-    <span class="font-semibold">Relive Our Special Day</span>
-  </div>
-  
-  <!-- YouTube Player Container -->
-  <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg border-4 border-white my-4">
-    <iframe class="w-full h-64 sm:h-96" 
-            src="https://www.youtube.com/embed/R3agKEJAB6c?start=518" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen></iframe>
-  </div>
-  
-  <p class="text-gray-600 mt-2">Watch highlights from our beautiful wedding ceremony</p>
-</div>
-
-<div class="rounded-xl overflow-hidden shadow-lg border-4 border-white my-4 h-48 sm:h-56">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.27506990666!2d78.50856037497184!3d17.44754540136248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a55c3d73d33%3A0xd91fe5c66eee5663!2sC.S.I+All+Saints'+Church+(Tirumalagiri)!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                  class="w-full h-full border-none" allowfullscreen loading="lazy"></iframe>
+        
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/R3agKEJAB6c?start=518" 
+                  frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen></iframe>
         </div>
-
-        <div class="flex justify-center mt-4">
-          <img src="https://www.dropbox.com/scl/fi/5ij2un8do9y9znfwicfp3/Church-High-Res.png?rlkey=a6czsb255jp078c041w491f1r&raw=1"
-               alt="Church Venue" class="rounded-lg h-48 sm:h-56 w-auto venue-image"/>
-        </div>
+        
+        <p class="text-gray-600 mt-2">Watch highlights from our beautiful wedding ceremony</p>
       </div>
 
-      <div class="flex flex-wrap justify-center gap-4 mt-8">
+      <div class="flex justify-center mt-8">
         <a href="tel:+919542181245" class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-pink-100">
-          📞 Call to RSVP
-        </a>
-        <button onclick="window.open('https://calendar.google.com/calendar/event?action=TEMPLATE&tse=true&text=Sandeep+%26+Suhasini+Wedding&dates=20250627T100000Z/20250627T120000Z&details=Join+us+in+celebrating+the+wedding+of+Sandeep+and+Suhasini!+We+look+forward+to+your+presence.%0AGoogle+Maps+Location:+https://maps.app.goo.gl/uUP8dnQRqn7eK7R8A&location=C.S.I+All+Saints%27+Church,+Tirumalagiri', '_blank')"
-                class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-purple-100">
-          🗓️ Add to Calendar
-        </button>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=C.S.I+All+Saints%27+Church,+Tirumalagiri" target="_blank"
-           class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-blue-100">
-          📍 Get Directions
+          📞 Contact Us
         </a>
       </div>
 
@@ -821,68 +756,10 @@
       }
     }
 
-    // Function to create and animate confetti effect (currently not active)
-    function createConfetti() {
-      var container = document.getElementById('confettiContainer');
-      var colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff']; // Confetti colors
-      var shapes = ['❤', '★', '✿', '❀', '✧']; // Confetti shapes (emojis)
-      var confettiCount = 100; // Number of confetti pieces
-
-      for (var i = 0; i < confettiCount; i++) {
-        var confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = `${Math.random() * 100}vw`; // Random horizontal position
-        confetti.style.animationDelay = `${Math.random() * 5}s`; // Random delay
-        confetti.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; // Random color
-        confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)]; // Random shape
-        confetti.style.animationName = 'confetti'; // Apply confetti animation
-        container.appendChild(confetti);
-      }
-    }
-
-    // Countdown Timer function
-    function startCountdown() {
-      // Set the wedding date and time to 5:30 PM IST (12:00 UTC)
-      var countdownDate = new Date("June 27, 2025 12:00:00 UTC").getTime();
-
-      var x = setInterval(function() {
-        var now = new Date().getTime();
-        var distance = countdownDate - now;
-
-        // Calculate days, hours, minutes, seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Display the results in the elements
-        document.getElementById("days").textContent = days;
-        document.getElementById("hours").textContent = hours;
-        document.getElementById("minutes").textContent = minutes;
-        document.getElementById("seconds").textContent = seconds;
-
-        // Add shimmer effect to numbers on update
-        document.querySelectorAll('.countdown-number').forEach(el => {
-          el.classList.remove('animate');
-          void el.offsetWidth; // Trigger reflow
-          el.classList.add('animate');
-        });
-
-
-        // If the countdown is over, write some text
-        if (distance < 0) {
-          clearInterval(x);
-          document.getElementById("countdown").innerHTML = "<p class='text-2xl text-pink-600 font-bold'>The wedding has begun!</p>";
-        }
-      }, 1000);
-    }
-
     // Initialize floating hearts and petals on load
     document.addEventListener('DOMContentLoaded', function() {
       createFloatingHearts();
       createFallingPetals();
-      startCountdown(); // Start the countdown when the DOM is fully loaded
     });
   </script>
 </body>
