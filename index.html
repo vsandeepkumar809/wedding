@@ -504,6 +504,157 @@
       height: 100%;
       border: none;
     }
+    /* Photo Gallery Styles */
+    .album-container {
+        max-width: 100%;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(255,255,255,0.6);
+    }
+    
+    .photo-strip-container {
+        position: relative;
+        overflow: hidden;
+        margin: 0 -10px;
+    }
+    
+    .photo-strip {
+        display: flex;
+        gap: 15px;
+        padding: 15px 10px;
+        transition: transform 0.7s cubic-bezier(0.16, 0.77, 0.39, 0.98);
+    }
+    
+    .photo {
+        flex: 0 0 auto;
+        width: 280px;
+        height: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        position: relative;
+        transition: all 0.4s ease;
+    }
+    
+    .photo:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+    }
+    
+    .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    .photo-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        color: white;
+        padding: 15px;
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    
+    .photo:hover .photo-caption {
+        transform: translateY(0);
+    }
+    
+    .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: #ec4899;
+        opacity: 0.9;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-btn:hover {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.1);
+        background: #ec4899;
+        color: white;
+    }
+    
+    .prev {
+        left: 5px;
+    }
+    
+    .next {
+        right: 5px;
+    }
+    
+    .dots-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        gap: 10px;
+    }
+    
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ddd;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .dot.active {
+        background: #ec4899;
+        transform: scale(1.3);
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .photo {
+        animation: fadeInUp 0.8s ease forwards;
+        opacity: 0;
+    }
+    
+    @media (min-width: 640px) {
+        .photo {
+            width: 320px;
+            height: 240px;
+        }
+        
+        .album-container {
+            padding: 30px;
+        }
+    }
   </style>
 </head>
 <body>
@@ -588,6 +739,27 @@
         <p class="text-gray-600 mt-2">Watch highlights from our beautiful wedding ceremony</p>
       </div>
 
+      <div class="section-divider">
+        <span class="dancing-font text-lg">Wedding Photos</span>
+      </div>
+
+      <div class="mt-6 text-center">
+        <div class="text-gray-800 text-lg mb-4">
+          <span class="text-2xl mr-2">📸</span>
+          <span class="font-semibold">Relive Our Special Moments</span>
+        </div>
+        
+        <div class="album-container">
+            <div class="photo-strip-container">
+                <div class="photo-strip"></div>
+                <button class="nav-btn prev">❮</button>
+                <button class="nav-btn next">❯</button>
+            </div>
+            
+            <div class="dots-container"></div>
+        </div>
+      </div>
+
       <div class="flex justify-center mt-8">
         <a href="tel:+919542181245" class="glass-button font-semibold px-6 py-3 rounded-full transition hover:bg-pink-100">
           📞 Contact Us
@@ -604,10 +776,6 @@
     <button class="play-pause-mini" id="miniPlayPause">▶</button>
     <button class="mute-button" id="muteButton">🔊</button>
   </div>
-
-  <audio id="weddingAudio" loop>
-    <source src="https://www.dropbox.com/scl/fi/k420tn46e95saz9csatu6/Canon-In-D-Piano-Ringtone.mp3?rlkey=dhg9d02j7c9tudymtum936u4i&dl=1" type="audio/mpeg">
-  </audio>
 
   <script>
     // Audio Elements and State Variables
@@ -756,413 +924,183 @@
       }
     }
 
-    // Initialize floating hearts and petals on load
-    document.addEventListener('DOMContentLoaded', function() {
-      createFloatingHearts();
-      createFallingPetals();
-    });
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Photo Gallery</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+    // Photo Gallery Functionality
+    const DROPBOX_IMAGES = [
+        {
+            url: "https://www.dropbox.com/scl/fi/6xum1tl7mp55bsw7wbghc/TSR04370.jpg?rlkey=gsjap0pgkxbr7tjjo7iujhi7x&st=bfmy6o49&raw=1",
+            name: "TSR04370"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/6px0is7lvmp1ouj10l5kk/YB201097.jpg?rlkey=fbpp1k3krm95lk6ov74ddtksi&st=ysbchx5u&raw=1",
+            name: "YB201097"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/bbcmy9vaxf9t0v0lonwjj/TSR04398.jpg?rlkey=k82d7td0bnvbfn60dg81ozyyh&st=oqkb3rbw&raw=1",
+            name: "TSR04398"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/w84aa6phl492atyfxdeqb/YB200634.jpg?rlkey=4ko6y9myb3ll4h8vpcg4qx1fo&st=u95gbvgd&raw=1",
+            name: "YB200634"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/25x9jatxx1g59035uhumd/YB200615.jpg?rlkey=qs14u96abvniv8dionjo4pgqk&st=dyu6f1kh&raw=1",
+            name: "YB200615"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/49uhziatakgvcyjzz15jk/YB902244.jpg?rlkey=1h9nl1qgptnm742xfblz96upy&st=dv5auumr&raw=1",
+            name: "YB902244"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/bisky1iyeybn1m7dh4pv2/YB902778.jpg?rlkey=wrdh4bw66aci68zneyl70n3fn&st=wxdgzaly&raw=1",
+            name: "YB902778"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/rcz3xci3yrpui4fuakt7l/YB902823.jpg?rlkey=leff84rrvkmaz24o57y84fibi&st=hexv8kqn&raw=1",
+            name: "YB902823"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/0crqx7483pd55v5jtqaca/YB201103.jpg?rlkey=lhbb5eg5ojb002h3y30wh4nw8&st=6w33v5bm&raw=1",
+            name: "YB201103"
+        },
+        {
+            url: "https://www.dropbox.com/scl/fi/0z0ke573jo7ow5x7otyw6/YB901728.jpg?rlkey=hy6ertnzkv9kab210joferrt9&st=5bob8u9y&raw=1",
+            name: "YB901728"
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            padding: 40px 20px;
-        }
-        
-        .album-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            background: white;
-            padding: 40px;
-        }
-        
-        .album-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .album-header h1 {
-            font-size: 2.8rem;
-            color: #0066ff;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .album-header p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-        
-        .photo-strip-container {
-            position: relative;
-            overflow: hidden;
-            margin: 0 -20px;
-        }
-        
-        .photo-strip {
-            display: flex;
-            gap: 25px;
-            padding: 30px 20px;
-            transition: transform 0.7s cubic-bezier(0.16, 0.77, 0.39, 0.98);
-        }
-        
-        .photo {
-            flex: 0 0 auto;
-            width: 380px;
-            height: 280px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        
-        .photo:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.18);
-        }
-        
-        .photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .photo-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            padding: 20px;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        
-        .photo:hover .photo-caption {
-            transform: translateY(0);
-        }
-        
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 60px;
-            height: 60px;
-            background: white;
-            border: none;
-            border-radius: 50%;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #0066ff;
-            opacity: 0.9;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover {
-            opacity: 1;
-            transform: translateY(-50%) scale(1.1);
-            background: #0066ff;
-            color: white;
-        }
-        
-        .prev {
-            left: -30px;
-        }
-        
-        .next {
-            right: -30px;
-        }
-        
-        .dots-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-            gap: 15px;
-        }
-        
-        .dot {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .dot.active {
-            background: #0066ff;
-            transform: scale(1.3);
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .photo {
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-        }
-        
-        @media (max-width: 1200px) {
-            .album-container {
-                padding: 30px;
-            }
-            
-            .photo {
-                width: 320px;
-                height: 240px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 20px 10px;
-            }
-            
-            .album-container {
-                padding: 20px;
-                border-radius: 12px;
-            }
-            
-            .album-header h1 {
-                font-size: 2rem;
-            }
-            
-            .photo {
-                width: 280px;
-                height: 210px;
-            }
-            
-            .photo-strip {
-                gap: 15px;
-            }
-            
-            .nav-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 22px;
-            }
-            
-            .prev {
-                left: -15px;
-            }
-            
-            .next {
-                right: -15px;
-            }
-        }
-    </style>
-<body>
-    <div class="album-container">
-        <div class="album-header">
-            <h1>Professional Photo Gallery</h1>
-            <p>Scroll through our collection of high-quality images</p>
-        </div>
-        
-        <div class="photo-strip-container">
-            <div class="photo-strip"></div>
-            <button class="nav-btn prev">❮</button>
-            <button class="nav-btn next">❯</button>
-        </div>
-        
-        <div class="dots-container"></div>
-    </div>
+    ];
 
-    <script>
-        // Updated Dropbox image links (converted to direct image URLs)
-        const DROPBOX_IMAGES = [
-            {
-                url: "https://www.dropbox.com/scl/fi/6xum1tl7mp55bsw7wbghc/TSR04370.jpg?rlkey=gsjap0pgkxbr7tjjo7iujhi7x&st=bfmy6o49&raw=1",
-                name: "TSR04370"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/6px0is7lvmp1ouj10l5kk/YB201097.jpg?rlkey=fbpp1k3krm95lk6ov74ddtksi&st=ysbchx5u&raw=1",
-                name: "YB201097"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/bbcmy9vaxf9t0v0lonwjj/TSR04398.jpg?rlkey=k82d7td0bnvbfn60dg81ozyyh&st=oqkb3rbw&raw=1",
-                name: "TSR04398"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/w84aa6phl492atyfxdeqb/YB200634.jpg?rlkey=4ko6y9myb3ll4h8vpcg4qx1fo&st=u95gbvgd&raw=1",
-                name: "YB200634"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/25x9jatxx1g59035uhumd/YB200615.jpg?rlkey=qs14u96abvniv8dionjo4pgqk&st=dyu6f1kh&raw=1",
-                name: "YB200615"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/49uhziatakgvcyjzz15jk/YB902244.jpg?rlkey=1h9nl1qgptnm742xfblz96upy&st=dv5auumr&raw=1",
-                name: "YB902244"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/bisky1iyeybn1m7dh4pv2/YB902778.jpg?rlkey=wrdh4bw66aci68zneyl70n3fn&st=wxdgzaly&raw=1",
-                name: "YB902778"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/rcz3xci3yrpui4fuakt7l/YB902823.jpg?rlkey=leff84rrvkmaz24o57y84fibi&st=hexv8kqn&raw=1",
-                name: "YB902823"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/0crqx7483pd55v5jtqaca/YB201103.jpg?rlkey=lhbb5eg5ojb002h3y30wh4nw8&st=6w33v5bm&raw=1",
-                name: "YB201103"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/0z0ke573jo7ow5x7otyw6/YB901728.jpg?rlkey=hy6ertnzkv9kab210joferrt9&st=5bob8u9y&raw=1",
-                name: "YB901728"
-            },
-            {
-                url: "https://www.dropbox.com/scl/fi/rcz3xci3yrpui4fuakt7l/YB902823.jpg?rlkey=leff84rrvkmaz24o57y84fibi&st=kvcik3mj&raw=1",
-                name: "YB902823"
-            }
-        ];
-
-        // Initialize the album
-        function initAlbum() {
-            const photoStrip = document.querySelector('.photo-strip');
-            const dotsContainer = document.querySelector('.dots-container');
+    // Initialize the album
+    function initAlbum() {
+        const photoStrip = document.querySelector('.photo-strip');
+        const dotsContainer = document.querySelector('.dots-container');
+        
+        // Add photos to the strip with staggered animations
+        DROPBOX_IMAGES.forEach((image, index) => {
+            const photoDiv = document.createElement('div');
+            photoDiv.className = 'photo';
+            photoDiv.style.animationDelay = `${index * 0.1}s`;
             
-            // Add photos to the strip with staggered animations
-            DROPBOX_IMAGES.forEach((image, index) => {
-                const photoDiv = document.createElement('div');
-                photoDiv.className = 'photo';
-                photoDiv.style.animationDelay = `${index * 0.1}s`;
-                
-                const img = document.createElement('img');
-                img.src = image.url;
-                img.alt = image.name;
-                img.loading = 'lazy';
-                
-                const caption = document.createElement('div');
-                caption.className = 'photo-caption';
-                caption.textContent = image.name;
-                
-                photoDiv.appendChild(img);
-                photoDiv.appendChild(caption);
-                photoStrip.appendChild(photoDiv);
-                
-                // Create dot indicator
-                const dot = document.createElement('div');
-                dot.className = 'dot';
-                dot.dataset.index = index;
-                dotsContainer.appendChild(dot);
+            const img = document.createElement('img');
+            img.src = image.url;
+            img.alt = image.name;
+            img.loading = 'lazy';
+            
+            const caption = document.createElement('div');
+            caption.className = 'photo-caption';
+            caption.textContent = image.name;
+            
+            photoDiv.appendChild(img);
+            photoDiv.appendChild(caption);
+            photoStrip.appendChild(photoDiv);
+            
+            // Create dot indicator
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            dot.dataset.index = index;
+            dotsContainer.appendChild(dot);
+        });
+        
+        // Initialize carousel
+        initCarousel();
+    }
+    
+    // Carousel functionality
+    function initCarousel() {
+        const photoStrip = document.querySelector('.photo-strip');
+        const photos = document.querySelectorAll('.photo');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const dots = document.querySelectorAll('.dot');
+        
+        let currentIndex = 0;
+        let isAnimating = false;
+        const photoWidth = photos[0].offsetWidth + 25; // width + gap
+        
+        function updateCarousel(instant = false) {
+            if (isAnimating) return;
+            
+            isAnimating = true;
+            
+            if (!instant) {
+                photoStrip.style.transition = 'transform 0.7s cubic-bezier(0.16, 0.77, 0.39, 0.98)';
+            } else {
+                photoStrip.style.transition = 'none';
+            }
+            
+            photoStrip.style.transform = `translateX(-${currentIndex * photoWidth}px)`;
+            
+            // Update dot indicators
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
             });
             
-            // Initialize carousel
-            initCarousel();
-        }
-        
-        // Carousel functionality
-        function initCarousel() {
-            const photoStrip = document.querySelector('.photo-strip');
-            const photos = document.querySelectorAll('.photo');
-            const prevBtn = document.querySelector('.prev');
-            const nextBtn = document.querySelector('.next');
-            const dots = document.querySelectorAll('.dot');
-            
-            let currentIndex = 0;
-            let isAnimating = false;
-            const photoWidth = photos[0].offsetWidth + 25; // width + gap
-            
-            function updateCarousel(instant = false) {
-                if (isAnimating) return;
-                
-                isAnimating = true;
-                
-                if (!instant) {
-                    photoStrip.style.transition = 'transform 0.7s cubic-bezier(0.16, 0.77, 0.39, 0.98)';
-                } else {
-                    photoStrip.style.transition = 'none';
-                }
-                
-                photoStrip.style.transform = `translateX(-${currentIndex * photoWidth}px)`;
-                
-                // Update dot indicators
-                dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentIndex);
-                });
-                
-                // Reset animation flag after transition ends
-                if (!instant) {
-                    photoStrip.addEventListener('transitionend', () => {
-                        isAnimating = false;
-                    }, { once: true });
-                } else {
+            // Reset animation flag after transition ends
+            if (!instant) {
+                photoStrip.addEventListener('transitionend', () => {
                     isAnimating = false;
-                }
+                }, { once: true });
+            } else {
+                isAnimating = false;
             }
-            
-            // Navigation buttons
-            nextBtn.addEventListener('click', () => {
-                if (currentIndex < photos.length - 1) {
-                    currentIndex++;
+        }
+        
+        // Navigation buttons
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < photos.length - 1) {
+                currentIndex++;
+                updateCarousel();
+            } else {
+                // Loop to first image
+                currentIndex = 0;
+                updateCarousel(true); // Instant transition for loop
+                setTimeout(() => {
+                    updateCarousel(); // Smooth transition after instant jump
+                }, 20);
+            }
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            } else {
+                // Loop to last image
+                currentIndex = photos.length - 1;
+                updateCarousel(true); // Instant transition for loop
+                setTimeout(() => {
+                    updateCarousel(); // Smooth transition after instant jump
+                }, 20);
+            }
+        });
+        
+        // Dot indicators
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const newIndex = parseInt(dot.dataset.index);
+                if (newIndex !== currentIndex) {
+                    currentIndex = newIndex;
                     updateCarousel();
-                } else {
-                    // Loop to first image
-                    currentIndex = 0;
-                    updateCarousel(true); // Instant transition for loop
-                    setTimeout(() => {
-                        updateCarousel(); // Smooth transition after instant jump
-                    }, 20);
                 }
             });
-            
-            prevBtn.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    updateCarousel();
-                } else {
-                    // Loop to last image
-                    currentIndex = photos.length - 1;
-                    updateCarousel(true); // Instant transition for loop
-                    setTimeout(() => {
-                        updateCarousel(); // Smooth transition after instant jump
-                    }, 20);
-                }
-            });
-            
-            // Dot indicators
-            dots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const newIndex = parseInt(dot.dataset.index);
-                    if (newIndex !== currentIndex) {
-                        currentIndex = newIndex;
-                        updateCarousel();
-                    }
-                });
-            });
-            
-            // Auto-scroll
-            let autoScroll = setInterval(() => {
+        });
+        
+        // Auto-scroll
+        let autoScroll = setInterval(() => {
+            if (currentIndex < photos.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }, 6000);
+        
+        // Pause auto-scroll on hover
+        const albumContainer = document.querySelector('.album-container');
+        albumContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoScroll);
+        });
+        
+        albumContainer.addEventListener('mouseleave', () => {
+            autoScroll = setInterval(() => {
                 if (currentIndex < photos.length - 1) {
                     currentIndex++;
                 } else {
@@ -1170,74 +1108,62 @@
                 }
                 updateCarousel();
             }, 6000);
+        });
+        
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        photoStrip.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            clearInterval(autoScroll);
+        }, { passive: true });
+        
+        photoStrip.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            handleSwipe();
             
-            // Pause auto-scroll on hover
-            const albumContainer = document.querySelector('.album-container');
-            albumContainer.addEventListener('mouseenter', () => {
-                clearInterval(autoScroll);
-            });
-            
-            albumContainer.addEventListener('mouseleave', () => {
-                autoScroll = setInterval(() => {
-                    if (currentIndex < photos.length - 1) {
-                        currentIndex++;
-                    } else {
-                        currentIndex = 0;
-                    }
-                    updateCarousel();
-                }, 6000);
-            });
-            
-            // Touch/swipe support for mobile
-            let touchStartX = 0;
-            let touchEndX = 0;
-            
-            photoStrip.addEventListener('touchstart', (e) => {
-                touchStartX = e.touches[0].clientX;
-                clearInterval(autoScroll);
-            }, { passive: true });
-            
-            photoStrip.addEventListener('touchend', (e) => {
-                touchEndX = e.changedTouches[0].clientX;
-                handleSwipe();
-                
-                // Restart auto-scroll
-                autoScroll = setInterval(() => {
-                    if (currentIndex < photos.length - 1) {
-                        currentIndex++;
-                    } else {
-                        currentIndex = 0;
-                    }
-                    updateCarousel();
-                }, 6000);
-            }, { passive: true });
-            
-            function handleSwipe() {
-                const swipeThreshold = 50;
-                const swipeDistance = touchEndX - touchStartX;
-                
-                if (swipeDistance < -swipeThreshold && currentIndex < photos.length - 1) {
-                    // Swipe left
+            // Restart auto-scroll
+            autoScroll = setInterval(() => {
+                if (currentIndex < photos.length - 1) {
                     currentIndex++;
-                    updateCarousel();
-                } else if (swipeDistance > swipeThreshold && currentIndex > 0) {
-                    // Swipe right
-                    currentIndex--;
-                    updateCarousel();
+                } else {
+                    currentIndex = 0;
                 }
+                updateCarousel();
+            }, 6000);
+        }, { passive: true });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
+            
+            if (swipeDistance < -swipeThreshold && currentIndex < photos.length - 1) {
+                // Swipe left
+                currentIndex++;
+                updateCarousel();
+            } else if (swipeDistance > swipeThreshold && currentIndex > 0) {
+                // Swipe right
+                currentIndex--;
+                updateCarousel();
             }
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                updateCarousel(true);
-            });
-            
-            // Initial update
-            updateCarousel(true);
         }
         
-        // Load images when page loads
-        window.addEventListener('DOMContentLoaded', initAlbum);
-    </script>
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            updateCarousel(true);
+        });
+        
+        // Initial update
+        updateCarousel(true);
+    }
+
+    // Initialize floating hearts and petals on load
+    document.addEventListener('DOMContentLoaded', function() {
+      createFloatingHearts();
+      createFallingPetals();
+      initAlbum();
+    });
+  </script>
 </body>
 </html>
